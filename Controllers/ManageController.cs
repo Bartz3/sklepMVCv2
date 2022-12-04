@@ -75,6 +75,7 @@ namespace sklepMVCv2.Controllers
                 TwoFactor = await UserManager.GetTwoFactorEnabledAsync(userId),
                 Logins = await UserManager.GetLoginsAsync(userId),
                 BrowserRemembered = await AuthenticationManager.TwoFactorBrowserRememberedAsync(userId),
+                //AddressID = UserManager.Users.Select(u=>u.Address).Where(u => u.AddressID ==);
             };
             return View(model);
         }
