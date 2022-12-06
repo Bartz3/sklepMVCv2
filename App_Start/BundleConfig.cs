@@ -23,7 +23,7 @@ namespace sklepMVCv2
                       "~/Scripts/bootstrap.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
-                      "~/Content/bootstrap.css",
+                      "~/Content/cerulean.css",
                       "~/Content/site.css"));
         }
     }
