@@ -17,13 +17,14 @@ namespace sklepMVCv2.Controllers
         // GET: Products
         public ActionResult Index()
         {
-            var product = db.Product.Include(p => p.Vat).Include(p=>p.Category);
+            var product = db.Product.Include(p => p.Vat);
+            //var product = db.Product.Include(p => p.Vat).Include(p=>p.Category);
 
             //var category = db.CategoryProducts.Select(cp => cp.Category).Where(cp => cp.Product == product);
-            var category = db.CategoryProducts.Select(c=>c.Category);
-            var category2 = db.Category.Select(c => c.CategoryName);
-            var category3 = db.Product.Include(p=>p.Category).Select(p => p.Category);
-            ViewBag.Category = category3;
+            //var category = db.CategoryProducts.Select(c=>c.Category);
+            //var category2 = db.Category.Select(c => c.CategoryName);
+            //var category3 = db.Product.Include(p=>p.Category).Select(p => p.Category);
+            //ViewBag.Category = category3;
             return View(product.ToList());
         }
 
@@ -35,7 +36,9 @@ namespace sklepMVCv2.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             Product product = db.Product.Find(id);
-            
+
+            List<Category> categories = db.CategoryProducts.Select(cp => cp.Category).Where(cp => cp.Product == product).ToList();
+           
             var categoryProducts = db.CategoryProducts.Include(c => c.Category).Include(c => c.Product);
             
             
