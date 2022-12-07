@@ -2,9 +2,11 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
+using System.Drawing;
 using System.Linq;
 using System.Net;
 using System.Web;
+using System.Web.Helpers;
 using System.Web.Mvc;
 using sklepMVCv2.Models;
 
@@ -18,7 +20,6 @@ namespace sklepMVCv2.Controllers
         public ActionResult Index()
         {
             var product = db.Product.Include(p => p.Vat);
-            
             return View(product.ToList());
         }
 
@@ -53,10 +54,16 @@ namespace sklepMVCv2.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ProductID,Name,Description,Price,SmallImage,BigImage,Quantity,VatID")] Product product)
+        public ActionResult Create([Bind(Include = "ProductID,Name,Description,Price,SmallImage,BigImage,Quantity,VatID")] Product product, HttpPostedFileBase bigimgname)
         {
+
             if (ModelState.IsValid)
             {
+                
+                product.BigImage = new byte[bigimgname.ContentLength];
+                bigimgname.InputStream.Read(product.BigImage, 0, bigimgname.ContentLength);
+               
+
                 db.Product.Add(product);
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -133,5 +140,20 @@ namespace sklepMVCv2.Controllers
             }
             base.Dispose(disposing);
         }
+
+
+
+       /* public ActionResult AddImage(Product model, HttpPostedFileBase bigimgname)
+        {
+            if (bigimgname != null)
+            {
+              
+            }
+            else
+            {
+                ViewBag.message = "Nie zapisano prawidłowo xd";
+                return View();
+            }
+        }*/
     }
 }
