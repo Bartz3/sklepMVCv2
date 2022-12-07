@@ -169,7 +169,6 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
-    <Compile Include="Controllers\AddressesController.cs" />
     <Compile Include="Controllers\CategoriesController.cs" />
     <Compile Include="Controllers\CategoryProductsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -190,9 +189,16 @@
     <Compile Include="Migrations\202212012240580_init4.designer.cs">
       <DependentUpon>202212012240580_init4.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202212061612409_databaseEdited.cs" />
+    <Compile Include="Migrations\202212061612409_databaseEdited.designer.cs">
+      <DependentUpon>202212061612409_databaseEdited.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202212070813249_test07.12.cs" />
+    <Compile Include="Migrations\202212070813249_test07.12.designer.cs">
+      <DependentUpon>202212070813249_test07.12.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
-    <Compile Include="Models\Address.cs" />
     <Compile Include="Models\Category.cs" />
     <Compile Include="Models\CategoryProducts.cs" />
     <Compile Include="Models\Complaint.cs" />
@@ -268,27 +274,12 @@
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
-    <Content Include="Views\Addresses\Create.cshtml" />
-    <Content Include="Views\Addresses\Delete.cshtml" />
-    <Content Include="Views\Addresses\Details.cshtml" />
-    <Content Include="Views\Addresses\Edit.cshtml" />
-    <Content Include="Views\Addresses\Index.cshtml" />
-    <Content Include="Views\CategoryProducts\Create.cshtml" />
-    <Content Include="Views\CategoryProducts\Delete.cshtml" />
-    <Content Include="Views\CategoryProducts\Details.cshtml" />
-    <Content Include="Views\CategoryProducts\Edit.cshtml" />
-    <Content Include="Views\CategoryProducts\Index.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Products\Create.cshtml" />
     <Content Include="Views\Products\Delete.cshtml" />
     <Content Include="Views\Products\Details.cshtml" />
     <Content Include="Views\Products\Edit.cshtml" />
     <Content Include="Views\Products\Index.cshtml" />
-    <Content Include="Views\Categories\Create.cshtml" />
-    <Content Include="Views\Categories\Delete.cshtml" />
-    <Content Include="Views\Categories\Details.cshtml" />
-    <Content Include="Views\Categories\Edit.cshtml" />
-    <Content Include="Views\Categories\Index.cshtml" />
-    <Content Include="Views\Home\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Migrations\202212012232575_init.resx">
@@ -299,6 +290,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202212012240580_init4.resx">
       <DependentUpon>202212012240580_init4.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202212061612409_databaseEdited.resx">
+      <DependentUpon>202212061612409_databaseEdited.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202212070813249_test07.12.resx">
+      <DependentUpon>202212070813249_test07.12.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

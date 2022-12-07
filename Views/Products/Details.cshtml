@@ -1,21 +1,15 @@
 ﻿@model sklepMVCv2.Models.Product
 
 @{
-    ViewBag.Title = "Szczegóły";
+    ViewBag.Title = "Details";
 }
 
-<h2>Szczegóły</h2>
-
-@foreach (var category in ViewBag.Categories)
-{
-    <a>category</a>
-}
+<h2>Details</h2>
 
 <div>
     <h4>Product</h4>
     <hr />
     <dl class="dl-horizontal">
-        @ViewBag.Category
         <dt>
             @Html.DisplayNameFor(model => model.Vat.VatID)
         </dt>

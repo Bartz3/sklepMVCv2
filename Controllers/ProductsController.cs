@@ -18,13 +18,7 @@ namespace sklepMVCv2.Controllers
         public ActionResult Index()
         {
             var product = db.Product.Include(p => p.Vat);
-            //var product = db.Product.Include(p => p.Vat).Include(p=>p.Category);
-
-            //var category = db.CategoryProducts.Select(cp => cp.Category).Where(cp => cp.Product == product);
-            //var category = db.CategoryProducts.Select(c=>c.Category);
-            //var category2 = db.Category.Select(c => c.CategoryName);
-            //var category3 = db.Product.Include(p=>p.Category).Select(p => p.Category);
-            //ViewBag.Category = category3;
+            
             return View(product.ToList());
         }
 
@@ -36,18 +30,14 @@ namespace sklepMVCv2.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             Product product = db.Product.Find(id);
-
-            List<Category> categories = db.CategoryProducts.Select(cp => cp.Category).Where(cp => cp.Product == product).ToList();
-           
-            var categoryProducts = db.CategoryProducts.Include(c => c.Category).Include(c => c.Product);
+            CategoryProducts categoryProducts = db.CategoryProducts.Find(product.ProductID);
+            // List<Category> categories = db.Category.Select(c=>c.CategoryName).Where(cp=>cp == product.ProductID);
             
-            
-
+            //List<Category> categories = db.CategoryProducts.Select(cp => cp.Category).Where(c=>c.CategoryID == product.Categor).ToList();
             if (product == null)
             {
                 return HttpNotFound();
             }
-            
             return View(product);
         }
 
@@ -55,7 +45,6 @@ namespace sklepMVCv2.Controllers
         public ActionResult Create()
         {
             ViewBag.VatID = new SelectList(db.Vat, "VatID", "VatID");
-            ViewBag.Category = new SelectList(db.Category, "Category", "Category");
             return View();
         }
 
@@ -74,7 +63,6 @@ namespace sklepMVCv2.Controllers
             }
 
             ViewBag.VatID = new SelectList(db.Vat, "VatID", "VatID", product.VatID);
-            //ViewBag.Category = new SelectList(db.Vat, "Category", "Category", product.Category); //added
             return View(product);
         }
 

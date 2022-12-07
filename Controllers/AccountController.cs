@@ -151,7 +151,14 @@ namespace sklepMVCv2.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email, AddressID=1};
+                var user = new ApplicationUser { UserName = model.Email, Email = model.Email,
+                Name=model.Name,
+                    Surname=model.Surname,
+                    City=model.City,
+                    Street=model.Street,
+                    HouseNumber=model.HouseNumber,
+                    ZipCode=model.ZipCode,
+                };
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {

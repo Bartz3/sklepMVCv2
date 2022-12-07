@@ -11,6 +11,7 @@ namespace sklepMVCv2.Controllers
         public ActionResult Index()
         {
             return View();
+            //return View("/Views/Products/Index.cshtml");
         }
 
         public ActionResult About()
