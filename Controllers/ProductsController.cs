@@ -2,9 +2,11 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
+using System.Drawing;
 using System.Linq;
 using System.Net;
 using System.Web;
+using System.Web.Helpers;
 using System.Web.Mvc;
 using sklepMVCv2.Models;
 
@@ -17,13 +19,7 @@ namespace sklepMVCv2.Controllers
         // GET: Products
         public ActionResult Index()
         {
-            var product = db.Product.Include(p => p.Vat).Include(p=>p.Category);
-            //var categoryProducts = db.CategoryProducts.Include(c => c.Category).Include(c => c.Product).ToList();
-            //var category = db.CategoryProducts.Select(cp => cp.Category).Where(cp => cp.Product == product);
-            //var category = db.CategoryProducts.Select(c=>c.Category);
-            //var category2 = db.Category.Select(c => c.CategoryName);
-            //var category3 = db.Product.Include(p=>p.Category).Select(p => p.Category);
-            //ViewBag.Category = categoryProducts;
+            var product = db.Product.Include(p => p.Vat);
             return View(product.ToList());
         }
 
@@ -35,30 +31,21 @@ namespace sklepMVCv2.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             Product product = db.Product.Find(id);
+            CategoryProducts categoryProducts = db.CategoryProducts.Find(product.ProductID);
+            // List<Category> categories = db.Category.Select(c=>c.CategoryName).Where(cp=>cp == product.ProductID);
             
-            var categoryProducts = db.CategoryProducts.Include(c => c.Category).Where(c => c.Product==product);
-
-            var categories = db.CategoryProducts.Select(cp => cp.Category).Where(cp => cp.Product == product);
-            ViewBag.Category = categories.ToString();
-            
-
+            //List<Category> categories = db.CategoryProducts.Select(cp => cp.Category).Where(c=>c.CategoryID == product.Categor).ToList();
             if (product == null)
             {
                 return HttpNotFound();
             }
-            
             return View(product);
         }
-        //public List<Category> GetCategories(Product product)
-        //{
-            
-        //    return categories;
-        //}
+
         // GET: Products/Create
         public ActionResult Create()
         {
             ViewBag.VatID = new SelectList(db.Vat, "VatID", "VatID");
-            ViewBag.CategoryID = new SelectList(db.Category, "CategoryID", "CategoryName");
             return View();
         }
 
@@ -67,17 +54,22 @@ namespace sklepMVCv2.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ProductID,Name,Description,Price,SmallImage,BigImage,Quantity,VatID")] Product product)
+        public ActionResult Create([Bind(Include = "ProductID,Name,Description,Price,SmallImage,BigImage,Quantity,VatID")] Product product, HttpPostedFileBase bigimgname)
         {
+
             if (ModelState.IsValid)
             {
+                
+                product.BigImage = new byte[bigimgname.ContentLength];
+                bigimgname.InputStream.Read(product.BigImage, 0, bigimgname.ContentLength);
+               
+
                 db.Product.Add(product);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
             ViewBag.VatID = new SelectList(db.Vat, "VatID", "VatID", product.VatID);
-            //ViewBag.Category = new SelectList(db.Vat, "Category", "Category", product.Category); //added
             return View(product);
         }
 
@@ -148,5 +140,20 @@ namespace sklepMVCv2.Controllers
             }
             base.Dispose(disposing);
         }
+
+
+
+       /* public ActionResult AddImage(Product model, HttpPostedFileBase bigimgname)
+        {
+            if (bigimgname != null)
+            {
+              
+            }
+            else
+            {
+                ViewBag.message = "Nie zapisano prawidłowo xd";
+                return View();
+            }
+        }*/
     }
 }

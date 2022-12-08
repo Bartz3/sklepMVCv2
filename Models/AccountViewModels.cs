@@ -79,6 +79,27 @@ namespace sklepMVCv2.Models
         [Display(Name = "Confirm password")]
         [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
+
+        //Dodane
+        [Display(Name = "Imię")]
+        public string Name { get; set; }
+
+        [Display(Name = "Nazwisko")]
+        public string Surname { get; set; }
+
+        [Display(Name = "Miasto")]
+        public string City { get; set; }
+
+        [Display(Name = "Ulica")]
+        public string Street { get; set; }
+
+        [Display(Name="Numer mieszkania")]
+        public int HouseNumber { get; set; }
+
+        [Display(Name = "Kod pocztowy")]
+        public string ZipCode { get; set; }
+
+
     }
 
     public class ResetPasswordViewModel

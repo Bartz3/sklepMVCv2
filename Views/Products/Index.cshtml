@@ -1,18 +1,20 @@
 ﻿@model IEnumerable<sklepMVCv2.Models.Product>
+
 @{
-    ViewBag.Title = "Produkty";
+    ViewBag.Title = "Index";
 }
 
-<h2>Lista produktów</h2>
+<h2>Index</h2>
 
 <p>
-    <button type="button" class="btn btn-primary" onclick="location.href='@Url.Action("Create","Products")';return false;">Dodaj nowy produkt</button>
+    @Html.ActionLink("Create New", "Create")
 </p>
+xdd
 @ViewBag.Category
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.ProductID)
+            @Html.DisplayNameFor(model => model.Vat.VatID)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Name)
@@ -41,11 +43,10 @@
         <th></th>
     </tr>
 
-    @foreach (var item in Model)
-    {
+@foreach (var item in Model) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.ProductID)
+            @Html.DisplayFor(modelItem => item.Vat.VatID)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Name)
@@ -57,24 +58,35 @@
                 @Html.DisplayFor(modelItem => item.Price)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Vat.VatRate)
+            @{
+                if (item.SmallImage != null)
+                {
+                    var base64 = Convert.ToBase64String(item.SmallImage);
+                    var imgsrc = string.Format("data:image/gif;base64,{0}", base64);
+                    <img src='@imgsrc' />
+                }
+
+            }
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.SmallImage)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.BigImage)
+            @{
+                if (item.BigImage != null)
+                {
+                    var base64 = Convert.ToBase64String(item.BigImage);
+                    var imgsrc = string.Format("data:image/gif;base64,{0}", base64);
+                    <img src='@imgsrc' />
+                }
+                 
+            }
+
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Quantity)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Category)
-            </td>
-            <td>
-                <button type="button" class="btn btn-dark" onclick="location.href='@Url.Action("Delete", new { id = item.ProductID })';return false;">Usuń</button>
-                <button type="button" class="btn btn-dark" onclick="location.href='@Url.Action("Edit", new { id = item.ProductID })';return false;">Edytuj</button>
-                <button type="button" class="btn btn-dark" onclick="location.href='@Url.Action("Details", new { id = item.ProductID })';return false;">Szczegóły</button>
+            @Html.ActionLink("Edit", "Edit", new { id=item.ProductID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.ProductID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.ProductID })
             </td>
         </tr>
     }

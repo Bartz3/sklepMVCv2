@@ -32,12 +32,11 @@ namespace sklepMVCv2.Models
         [Display(Name = "Stawka VAT")]
         public int VatID { get; set; }
 
-
         public virtual ICollection<ExtraFile> ExtraFile { get; set; }
 
         public virtual ICollection<OrderProduct> OrderProduct { get; set; }
         public virtual Vat Vat { get; set; }
         [Display(Name="Kategoria")]
-        public virtual ICollection<Category> Category { get; set; }
+        public virtual ICollection<CategoryProducts> CategoryProducts { get; set; }
     }
 }

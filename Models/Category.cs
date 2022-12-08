@@ -14,6 +14,6 @@ namespace sklepMVCv2.Models
         [Display(Name = "Nazwa kategorii")]
         public string CategoryName { get; set; }
 
-        public virtual ICollection<Product> Product { get; set; }
+        public virtual ICollection<CategoryProducts> CategoryProducts { get; set; }
     }
 }

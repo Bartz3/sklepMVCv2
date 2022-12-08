@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Data.Entity;
 using System.Security.Claims;
@@ -19,18 +20,30 @@ namespace sklepMVCv2.Models
             return userIdentity;
         }
 
-       // [Required]
+ 
         [MaxLength(100)]
         [Display(Name = "Imię")]    
         public string Name { get; set; }
-       // [Required]
+
         [MaxLength(100)]
         [Display(Name = "Nazwisko")]
         public string Surname { get; set; }
-       //[Required]
+       
+        [MaxLength(100)]
+        [Display(Name = "Miasto")]
+        public string City { get; set; }
+       
+        [MaxLength(100)]
+        [Display(Name = "Ulica")]
+        public string Street { get; set; }
 
-        public int AddressID { get; set; }
-        public virtual Address Address { get; set; }
+        [Display(Name="Numer mieszkania")]
+        public int HouseNumber { get; set; }
+       
+        [MaxLength(10)]
+        [Display(Name = "Kod pocztowy")]
+        public string ZipCode { get; set; }
+
         public virtual ICollection<Complaint> Complaint { get; set; }
         public virtual ICollection<Order> Order { get; set; }
     }
@@ -47,16 +60,14 @@ namespace sklepMVCv2.Models
             return new ApplicationDbContext();
         }
 
-        public virtual DbSet<Address> Address { get; set; }
+        
         public virtual DbSet<Category> Category { get; set; }
         public virtual DbSet<CategoryProducts> CategoryProducts { get; set; }
         public virtual DbSet<Complaint> Complaint { get; set; }
         public virtual DbSet<ExtraFile> ExtraFile { get; set; }
         public virtual DbSet<Order> Order { get; set; }
         public virtual DbSet<Product> Product { get; set; }
-        //public virtual DbSet<ApplicationUser> User { get; set; }
 
-        //public virtual DbSet<User> User { get; set; }
         public virtual DbSet<Vat> Vat { get; set; }
         public virtual DbSet<OrderProduct> OrderProduct { get; set; }
         public virtual DbSet<VisitCount> VisitCount { get; set; }
