@@ -8,7 +8,6 @@
 <p>
     <button type="button" class="btn btn-primary" onclick="location.href='@Url.Action("Create","Products")';return false;">Dodaj nowy produkt</button>
 </p>
-xdd
 @ViewBag.Category
 <table class="table">
     <tr>
@@ -73,9 +72,9 @@ xdd
                 @Html.DisplayFor(modelItem => item.Category)
             </td>
             <td>
-                <button type="button" class="btn btn-dark" onclick="location.href='@Url.Action("Delete", new { id = item.ProductID })';return false;">Edytuj</button>
-                <button type="button" class="btn btn-dark" onclick="location.href='@Url.Action("Edit", new { id = item.ProductID })';return false;">Szczegóły</button>
-                <button type="button" class="btn btn-dark" onclick="location.href='@Url.Action("Details", new { id = item.ProductID })';return false;">Usuń</button>
+                <button type="button" class="btn btn-dark" onclick="location.href='@Url.Action("Delete", new { id = item.ProductID })';return false;">Usuń</button>
+                <button type="button" class="btn btn-dark" onclick="location.href='@Url.Action("Edit", new { id = item.ProductID })';return false;">Edytuj</button>
+                <button type="button" class="btn btn-dark" onclick="location.href='@Url.Action("Details", new { id = item.ProductID })';return false;">Szczegóły</button>
             </td>
         </tr>
     }

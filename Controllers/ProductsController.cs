@@ -18,12 +18,12 @@ namespace sklepMVCv2.Controllers
         public ActionResult Index()
         {
             var product = db.Product.Include(p => p.Vat).Include(p=>p.Category);
-
+            //var categoryProducts = db.CategoryProducts.Include(c => c.Category).Include(c => c.Product).ToList();
             //var category = db.CategoryProducts.Select(cp => cp.Category).Where(cp => cp.Product == product);
-            var category = db.CategoryProducts.Select(c=>c.Category);
-            var category2 = db.Category.Select(c => c.CategoryName);
-            var category3 = db.Product.Include(p=>p.Category).Select(p => p.Category);
-            ViewBag.Category = category3;
+            //var category = db.CategoryProducts.Select(c=>c.Category);
+            //var category2 = db.Category.Select(c => c.CategoryName);
+            //var category3 = db.Product.Include(p=>p.Category).Select(p => p.Category);
+            //ViewBag.Category = categoryProducts;
             return View(product.ToList());
         }
 
@@ -36,8 +36,10 @@ namespace sklepMVCv2.Controllers
             }
             Product product = db.Product.Find(id);
             
-            var categoryProducts = db.CategoryProducts.Include(c => c.Category).Include(c => c.Product);
-            
+            var categoryProducts = db.CategoryProducts.Include(c => c.Category).Where(c => c.Product==product);
+
+            var categories = db.CategoryProducts.Select(cp => cp.Category).Where(cp => cp.Product == product);
+            ViewBag.Category = categories.ToString();
             
 
             if (product == null)
@@ -47,12 +49,16 @@ namespace sklepMVCv2.Controllers
             
             return View(product);
         }
-
+        //public List<Category> GetCategories(Product product)
+        //{
+            
+        //    return categories;
+        //}
         // GET: Products/Create
         public ActionResult Create()
         {
             ViewBag.VatID = new SelectList(db.Vat, "VatID", "VatID");
-            ViewBag.Category = new SelectList(db.Category, "Category", "Category");
+            ViewBag.CategoryID = new SelectList(db.Category, "CategoryID", "CategoryName");
             return View();
         }
 
