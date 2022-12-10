@@ -28,8 +28,6 @@ namespace sklepMVCv2.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             Category category = db.Category.Find(id);
-
-            var productsInCategory = db.CategoryProducts.Select(cp=>cp.Product).Where(p=>p.ProductID==id).ToList();
             if (category == null)
             {
                 return HttpNotFound();

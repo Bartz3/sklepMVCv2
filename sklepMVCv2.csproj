@@ -280,6 +280,16 @@
     <Content Include="Views\Products\Details.cshtml" />
     <Content Include="Views\Products\Edit.cshtml" />
     <Content Include="Views\Products\Index.cshtml" />
+    <Content Include="Views\Categories\Create.cshtml" />
+    <Content Include="Views\Categories\Delete.cshtml" />
+    <Content Include="Views\Categories\Details.cshtml" />
+    <Content Include="Views\Categories\Edit.cshtml" />
+    <Content Include="Views\Categories\Index.cshtml" />
+    <Content Include="Views\CategoryProducts\Create.cshtml" />
+    <Content Include="Views\CategoryProducts\Delete.cshtml" />
+    <Content Include="Views\CategoryProducts\Details.cshtml" />
+    <Content Include="Views\CategoryProducts\Edit.cshtml" />
+    <Content Include="Views\CategoryProducts\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Migrations\202212012232575_init.resx">

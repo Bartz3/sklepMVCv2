@@ -6,19 +6,18 @@
 
 <h2>Details</h2>
 
-2
-@ViewBag.Category
 
+@*@ViewBag.categories*@
 <div>
     <h4>Product</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.Vat.VatID)
+            @Html.DisplayNameFor(model => model.Vat.VatRate)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Vat.VatID)
+            @Html.DisplayFor(model => model.Vat.VatRate)
         </dd>
 
         <dt>
@@ -68,6 +67,16 @@
         <dd>
             @Html.DisplayFor(model => model.Quantity)
         </dd>
+        <dt>
+            @Html.DisplayFor(model => model.CategoryProducts)
+        </dt>
+        <dd>
+            @foreach (var category in @ViewBag.categories)
+            {
+                <p>@category</p>
+            }
+        </dd>
+        
 
     </dl>
 </div>

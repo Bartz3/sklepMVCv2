@@ -20,6 +20,9 @@ namespace sklepMVCv2.Controllers
         public ActionResult Index()
         {
             var product = db.Product.Include(p => p.Vat);
+
+            
+
             return View(product.ToList());
         }
 
@@ -31,10 +34,11 @@ namespace sklepMVCv2.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             Product product = db.Product.Find(id);
-            CategoryProducts categoryProducts = db.CategoryProducts.Find(product.ProductID);
-            // List<Category> categories = db.Category.Select(c=>c.CategoryName).Where(cp=>cp == product.ProductID);
-            
-            //List<Category> categories = db.CategoryProducts.Select(cp => cp.Category).Where(c=>c.CategoryID == product.Categor).ToList();
+
+            var categoryProducts = db.CategoryProducts.Include(c => c.Category).Where(p=>p.ProductID==id).Select(p=>p.Category.CategoryName).ToList();
+
+            ViewBag.categories =categoryProducts;
+            // var query2 = db.Companies.Where(c => c.Name.ToLower() == company.Name.ToLower());
             if (product == null)
             {
                 return HttpNotFound();
