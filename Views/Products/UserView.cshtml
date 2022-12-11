@@ -1,0 +1,66 @@
+﻿@model IEnumerable<sklepMVCv2.Models.Product>
+
+@{
+    ViewBag.Title = "UserView";
+}
+
+<h2>Produkty</h2>
+@Styles.Render("~/Content/userView.css")
+<table class="table table-bordered">
+
+    @foreach (var item in Model)
+    {
+
+        <tr>
+            <td>
+                @{
+                    if (item.Image != null)
+                    {
+                        var base64 = Convert.ToBase64String(item.Image);
+                        var imgsrc = string.Format("data:image/gif;base64,{0}", base64);
+                        <img src='@imgsrc' width="150" height="150" />
+                    }
+
+                }
+                <h2>@Html.DisplayFor(modelItem => item.Name)</h2>
+                <p>Cena: @Html.DisplayFor(modelItem => item.Price) zł</p>
+                <button type="button" onclick="location.href='@Url.Action("Create","Products")';return false;">Dodaj do koszyka</button>
+            </td>
+        </tr>
+    }
+
+</table>
+
+@*<table class="table">
+    @foreach (var item2 in Model)
+    {
+        int i = 0;
+        if (i % 3 == 0)
+        {
+            <tr>
+        }
+
+        <td>
+            @{
+                if (item2.BigImage != null)
+                {
+                    var base64 = Convert.ToBase64String(item2.BigImage);
+                    var imgsrc = string.Format("data:image/gif;base64,{0}", base64);
+                    <img src='@imgsrc' width="150" height="150" />
+                }
+
+            }
+            <h2>@Html.DisplayFor(modelItem => item2.Name)</h2>
+            <p>Cena: @Html.DisplayFor(modelItem => item2.Price) zł</p>
+            <button>Add to Cart</button>
+        </td>
+
+
+       @if (i % 3 == 0)
+        {
+            
+            </tr>
+        }
+    }
+
+</table>*@

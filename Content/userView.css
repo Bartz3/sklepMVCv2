@@ -1,0 +1,38 @@
+﻿table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+tr {
+    border: 1px solid #ccc;
+}
+
+td {
+    text-align: center;
+    padding: 10px;
+}
+
+img {
+    width: 150px;
+    height: 150px;
+}
+
+h3 {
+    margin: 0;
+    font-size: 16px;
+}
+
+p {
+    margin: 0;
+    font-size: 14px;
+    color: #666;
+}
+
+button {
+    padding: 5px 10px;
+    background-color: #333;
+    color: #fff;
+    border: 0;
+    cursor: pointer;
+}
+

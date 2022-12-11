@@ -19,13 +19,13 @@ namespace sklepMVCv2.Models
         [Display(Name = "Opis produktu")]
         public string Description { get; set; }
         [Required]
-        [Range(0,int.MaxValue,ErrorMessage ="Podana cena jest nieprawidłowa.")]
+        [Range(0,double.MaxValue,ErrorMessage ="Podana cena jest nieprawidłowa.")]
         [Display(Name = "Cena")]
         public decimal Price { get; set; }
         [Display(Name ="Obrazek mały")]
         public byte[] SmallImage { get; set; }
-        [Display(Name ="Obrazek duży")]
-        public byte[] BigImage { get; set; }
+        [Display(Name ="Obrazek")]
+        public byte[] Image { get; set; }
      
         [Display(Name = "Ilość")]
         public int Quantity { get; set; }

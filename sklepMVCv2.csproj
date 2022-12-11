@@ -197,6 +197,10 @@
     <Compile Include="Migrations\202212070813249_test07.12.designer.cs">
       <DependentUpon>202212070813249_test07.12.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202212111447537_BigImageNameChange.cs" />
+    <Compile Include="Migrations\202212111447537_BigImageNameChange.designer.cs">
+      <DependentUpon>202212111447537_BigImageNameChange.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Category.cs" />
@@ -226,6 +230,7 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\cerulean.css" />
+    <Content Include="Content\userView.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -290,6 +295,7 @@
     <Content Include="Views\CategoryProducts\Details.cshtml" />
     <Content Include="Views\CategoryProducts\Edit.cshtml" />
     <Content Include="Views\CategoryProducts\Index.cshtml" />
+    <Content Include="Views\Products\UserView.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Migrations\202212012232575_init.resx">
@@ -306,6 +312,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202212070813249_test07.12.resx">
       <DependentUpon>202212070813249_test07.12.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202212111447537_BigImageNameChange.resx">
+      <DependentUpon>202212111447537_BigImageNameChange.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

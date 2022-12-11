@@ -20,11 +20,14 @@ namespace sklepMVCv2.Controllers
         public ActionResult Index()
         {
             var product = db.Product.Include(p => p.Vat);
-
-            
-
             return View(product.ToList());
         }
+        public ActionResult UserView()
+        {
+            var product = db.Product.Include(p => p.Vat);
+            return View(product.ToList());
+        }
+
 
         // GET: Products/Details/5
         public ActionResult Details(int? id)
@@ -49,7 +52,7 @@ namespace sklepMVCv2.Controllers
         // GET: Products/Create
         public ActionResult Create()
         {
-            ViewBag.VatID = new SelectList(db.Vat, "VatID", "VatID");
+            ViewBag.VatID = new SelectList(db.Vat, "VatRate", "VatRate");
             return View();
         }
 
@@ -58,14 +61,14 @@ namespace sklepMVCv2.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ProductID,Name,Description,Price,SmallImage,BigImage,Quantity,VatID")] Product product, HttpPostedFileBase bigimgname)
+        public ActionResult Create([Bind(Include = "ProductID,Name,Description,Price,SmallImage,Image,Quantity,VatID")] Product product, HttpPostedFileBase imageName)
         {
 
             if (ModelState.IsValid)
             {
                 
-                product.BigImage = new byte[bigimgname.ContentLength];
-                bigimgname.InputStream.Read(product.BigImage, 0, bigimgname.ContentLength);
+                product.Image = new byte[imageName.ContentLength];
+                imageName.InputStream.Read(product.Image, 0, imageName.ContentLength);
                
 
                 db.Product.Add(product);
@@ -98,10 +101,13 @@ namespace sklepMVCv2.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ProductID,Name,Description,Price,SmallImage,BigImage,Quantity,VatID")] Product product)
+        public ActionResult Edit([Bind(Include = "ProductID,Name,Description,Price,SmallImage,Image,Quantity,VatID")] Product product, HttpPostedFileBase imageName)
         {
             if (ModelState.IsValid)
             {
+                product.Image = new byte[imageName.ContentLength];
+                imageName.InputStream.Read(product.Image, 0, imageName.ContentLength);
+
                 db.Entry(product).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -145,19 +151,24 @@ namespace sklepMVCv2.Controllers
             base.Dispose(disposing);
         }
 
-
-
-       /* public ActionResult AddImage(Product model, HttpPostedFileBase bigimgname)
+        public ActionResult goToBucket()
         {
-            if (bigimgname != null)
-            {
-              
-            }
-            else
-            {
-                ViewBag.message = "Nie zapisano prawidłowo xd";
-                return View();
-            }
-        }*/
+        
+            return RedirectToAction("Bucket");
+        }
+
+
+        /* public ActionResult AddImage(Product model, HttpPostedFileBase bigimgname)
+         {
+             if (bigimgname != null)
+             {
+
+             }
+             else
+             {
+                 ViewBag.message = "Nie zapisano prawidłowo xd";
+                 return View();
+             }
+         }*/
     }
 }

@@ -4,17 +4,15 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+<h2>Produkty</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    <button type="button" class="btn btn-primary" onclick="location.href='@Url.Action("Create","Products")';return false;">Dodaj nowy produkt</button>
 </p>
-xdd
-@ViewBag.Category
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.Vat.VatID)
+            @Html.DisplayNameFor(model => model.ProductID)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Name)
@@ -32,13 +30,13 @@ xdd
             @Html.DisplayNameFor(model => model.SmallImage)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.BigImage)
+            @Html.DisplayNameFor(model => model.Image)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Quantity)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.CategoryProducts.Count)
+            @Html.DisplayNameFor(model => model.CategoryProducts)
         </th>
         <th></th>
     </tr>
@@ -47,7 +45,7 @@ xdd
     {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.Vat.VatID)
+                @Html.DisplayFor(modelItem => item.ProductID)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Name)
@@ -59,23 +57,26 @@ xdd
                 @Html.DisplayFor(modelItem => item.Price)
             </td>
             <td>
+                @Html.DisplayFor(modelItem => item.Vat.VatRate)
+            </td>
+            <td>
                 @{
                     if (item.SmallImage != null)
                     {
                         var base64 = Convert.ToBase64String(item.SmallImage);
                         var imgsrc = string.Format("data:image/gif;base64,{0}", base64);
-                        <img src='@imgsrc' />
+                       <img src='@imgsrc' width="150" height="150" />
                     }
 
                 }
             </td>
             <td>
                 @{
-                    if (item.BigImage != null)
+                    if (item.Image != null)
                     {
-                        var base64 = Convert.ToBase64String(item.BigImage);
+                        var base64 = Convert.ToBase64String(item.Image);
                         var imgsrc = string.Format("data:image/gif;base64,{0}", base64);
-                        <img src='@imgsrc' />
+                                <img src='@imgsrc' width="150" height="150" />
                     }
 
                 }
@@ -88,9 +89,9 @@ xdd
                 @Html.DisplayFor(modelItem => item.CategoryProducts.Count)
             </td>
             <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.ProductID }) |
-                @Html.ActionLink("Details", "Details", new { id = item.ProductID }) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.ProductID })
+                <button type="button" class="btn btn-dark" onclick="location.href='@Url.Action("Delete", new { id = item.ProductID })';return false;">Usuń</button>
+                <button type="button" class="btn btn-dark" onclick="location.href='@Url.Action("Edit", new { id = item.ProductID })';return false;">Edytuj</button>
+                <button type="button" class="btn btn-dark" onclick="location.href='@Url.Action("Details", new { id = item.ProductID })';return false;">Szczegóły</button>
             </td>
         </tr>
     }

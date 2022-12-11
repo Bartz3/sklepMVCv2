@@ -7,7 +7,7 @@
 <h2>Index</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    <button type="button" class="btn btn-primary" onclick="location.href='@Url.Action("Create","Categories")';return false;">Dodaj nową kategorię</button>
 </p>
 <table class="table">
     <tr>
@@ -23,9 +23,9 @@
             @Html.DisplayFor(modelItem => item.CategoryName)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.CategoryID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.CategoryID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.CategoryID })
+            <button type="button" class="btn btn-dark" onclick="location.href='@Url.Action("Delete", new { id = item.CategoryID })';return false;">Usuń</button>
+            <button type="button" class="btn btn-dark" onclick="location.href='@Url.Action("Edit", new { id = item.CategoryID })';return false;">Edytuj</button>
+            <button type="button" class="btn btn-dark" onclick="location.href='@Url.Action("Details", new { id = item.CategoryID })';return false;">Szczegóły</button>
         </td>
     </tr>
 }
