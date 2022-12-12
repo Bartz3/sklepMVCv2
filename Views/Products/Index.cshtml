@@ -26,9 +26,7 @@
         <th>
             @Html.DisplayNameFor(model => model.Vat.VatRate)
         </th>
-        <th>
-            @Html.DisplayNameFor(model => model.SmallImage)
-        </th>
+
         <th>
             @Html.DisplayNameFor(model => model.Image)
         </th>
@@ -61,22 +59,11 @@
             </td>
             <td>
                 @{
-                    if (item.SmallImage != null)
-                    {
-                        var base64 = Convert.ToBase64String(item.SmallImage);
-                        var imgsrc = string.Format("data:image/gif;base64,{0}", base64);
-                       <img src='@imgsrc' width="150" />
-                    }
-
-                }
-            </td>
-            <td>
-                @{
                     if (item.Image != null)
                     {
                         var base64 = Convert.ToBase64String(item.Image);
                         var imgsrc = string.Format("data:image/gif;base64,{0}", base64);
-                                <img src='@imgsrc'  height="100"/>
+                        <img src='@imgsrc' height="100" />
                     }
 
                 }
@@ -85,9 +72,14 @@
             <td>
                 @Html.DisplayFor(modelItem => item.Quantity)
             </td>
+
             <td>
-                @Html.DisplayFor(modelItem => item.CategoryProducts.Count)
+                @foreach (var Category in item.CategoryProducts) 
+                {
+                    @Html.DisplayFor(modelItem => Category.Category.CategoryName)<br />
+                }
             </td>
+            
             <td>
                 <button type="button" class="btn btn-dark" onclick="location.href='@Url.Action("Details", new { id = item.ProductID })';return false;">Szczegóły</button>
                 <button type="button" class="btn btn-dark" onclick="location.href='@Url.Action("Edit", new { id = item.ProductID })';return false;">Edytuj</button>

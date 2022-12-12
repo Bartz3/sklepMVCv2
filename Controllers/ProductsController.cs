@@ -5,6 +5,7 @@ using System.Data.Entity;
 using System.Drawing;
 using System.Linq;
 using System.Net;
+using System.Security.Cryptography;
 using System.Web;
 using System.Web.Helpers;
 using System.Web.Mvc;
@@ -20,6 +21,8 @@ namespace sklepMVCv2.Controllers
         public ActionResult Index()
         {
             var product = db.Product.Include(p => p.Vat);
+            var categories = (from c in db.Category select c).ToList();
+            ViewBag.Categories = categories;
             return View(product.ToList());
         }
         public ActionResult UserView()
