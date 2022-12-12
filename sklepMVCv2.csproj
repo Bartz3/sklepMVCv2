@@ -218,12 +218,9 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="App_Data\MyDB2.mdf">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
+    <Content Include="App_Data\MyDB2.mdf" />
     <Content Include="App_Data\MyDB2_log.ldf">
       <DependentUpon>MyDB2.mdf</DependentUpon>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
@@ -296,6 +293,8 @@
     <Content Include="Views\CategoryProducts\Edit.cshtml" />
     <Content Include="Views\CategoryProducts\Index.cshtml" />
     <Content Include="Views\Products\UserView.cshtml" />
+    <Content Include="Views\Products\ShoppingCart.cshtml" />
+    <Content Include="Views\Products\showCart.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Migrations\202212012232575_init.resx">
@@ -330,6 +329,7 @@
     <Content Include="Scripts\jquery-3.4.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.4.1.min.map" />
   </ItemGroup>
+  <ItemGroup />
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

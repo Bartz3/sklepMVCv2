@@ -1,0 +1,12 @@
+﻿@model List<sklepMVCv2.Models.Product>
+@{
+    ViewBag.Title = "ShoppingCart";
+}
+
+<h2>ShoppingCart</h2>
+
+@foreach (var product in Model)
+{
+    <p>@product.Name</p>
+    <p>@product.Price</p>
+}

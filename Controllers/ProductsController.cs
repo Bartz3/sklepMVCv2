@@ -28,6 +28,57 @@ namespace sklepMVCv2.Controllers
             return View(product.ToList());
         }
 
+        //Dodawanie do koszyka w ciasteczku
+        [HttpPost]
+        public ActionResult AddToCart(int id)
+        {
+            // Retrieve the product from the database
+            var product = db.Product.Find(id);
+
+            // Retrieve the shopping cart cookie
+            var cartCookie = Request.Cookies["ShoppingCart"];
+            if (cartCookie == null)
+            {
+                // Create a new cookie if it doesn't exist
+                cartCookie = new HttpCookie("ShoppingCart");
+            }
+
+            // Add the product to the cookie
+            cartCookie.Values[id.ToString()] = product.Name;
+
+            // Save the cookie
+            Response.Cookies.Add(cartCookie);
+
+            // Redirect to the shopping cart page
+            return RedirectToAction("ShoppingCart", "Products");
+        }
+        //Odczytywanie danych z koszyka
+        public ActionResult showCart()
+        {
+            var cartCookie = Request.Cookies["ShoppingCart"];
+            if (cartCookie != null)
+            {
+                // Create a list to store the products
+                var products = new List<Product>();
+
+                // Iterate over the cookie values
+                foreach (var key in cartCookie.Values.AllKeys)
+                {
+                    // Retrieve the product from the database using the key (product ID)
+                    var product = db.Product.Find(int.Parse(key));
+                    if (product != null)
+                    {
+                        // Add the product to the list
+                        products.Add(product);
+                    }
+                }
+
+                // Pass the list of products to the view
+                return View(products);
+
+            }
+            return RedirectToAction("ShoppingCart", "Products");
+        }
 
         // GET: Products/Details/5
         public ActionResult Details(int? id)

@@ -1,5 +1,6 @@
 ﻿using Microsoft.Owin;
 using Owin;
+using System.Web.Hosting;
 
 [assembly: OwinStartupAttribute(typeof(sklepMVCv2.Startup))]
 namespace sklepMVCv2
@@ -9,6 +10,8 @@ namespace sklepMVCv2
         public void Configuration(IAppBuilder app)
         {
             ConfigureAuth(app);
+            //app.UseMiddleware(typeof(VisitorCounterMiddleware));
         }
+
     }
 }
