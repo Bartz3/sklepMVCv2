@@ -21,13 +21,22 @@ namespace sklepMVCv2.Controllers
         public ActionResult Index()
         {
             var product = db.Product.Include(p => p.Vat);
-            var categories = (from c in db.Category select c).ToList();
-            ViewBag.Categories = categories;
+
             return View(product.ToList());
         }
-        public ActionResult UserView()
+        public ActionResult UserView(string searchString)
         {
             var product = db.Product.Include(p => p.Vat);
+            //var categories = (from c in db.Category select c).ToList();
+            ViewData["CurrentFilter"] = searchString;
+            if (!string.IsNullOrEmpty(searchString))
+            {
+                product = product.Where(s => s.Name.Contains(searchString));
+            }
+            else
+            {
+                //product = null;
+            }
             return View(product.ToList());
         }
 
