@@ -41,8 +41,8 @@ namespace sklepMVCv2.Controllers
         }
 
         //Dodawanie do koszyka w ciasteczku
-        [HttpPost]
-        public ActionResult AddToCart(int id)
+
+        public ActionResult AddToCart(int? id)
         {
             // Retrieve the product from the database
             var product = db.Product.Find(id);
@@ -53,6 +53,7 @@ namespace sklepMVCv2.Controllers
             {
                 // Create a new cookie if it doesn't exist
                 cartCookie = new HttpCookie("ShoppingCart");
+                cartCookie.Expires = DateTime.Now.AddMinutes(10);
             }
 
             // Add the product to the cookie
@@ -61,8 +62,10 @@ namespace sklepMVCv2.Controllers
             // Save the cookie
             Response.Cookies.Add(cartCookie);
 
+            ViewBag.test = cartCookie.Values;
+
             // Redirect to the shopping cart page
-            return RedirectToAction("ShoppingCart", "Products");
+            return View("showCart");
         }
         //Odczytywanie danych z koszyka
         public ActionResult showCart()
@@ -86,10 +89,10 @@ namespace sklepMVCv2.Controllers
                 }
 
                 // Pass the list of products to the view
-                return View(products);
-
+                if(products!=null)
+                    return View(products.ToList());
             }
-            return RedirectToAction("ShoppingCart", "Products");
+            return View("showCart");
         }
 
         // GET: Products/Details/5
@@ -101,9 +104,9 @@ namespace sklepMVCv2.Controllers
             }
             Product product = db.Product.Find(id);
 
-            var categoryProducts = db.CategoryProducts.Include(c => c.Category).Where(p=>p.ProductID==id).Select(p=>p.Category.CategoryName).ToList();
+            var categoryProducts = db.CategoryProducts.Include(c => c.Category).Where(p => p.ProductID == id).Select(p => p.Category.CategoryName).ToList();
 
-            ViewBag.categories =categoryProducts;
+            ViewBag.categories = categoryProducts;
             // var query2 = db.Companies.Where(c => c.Name.ToLower() == company.Name.ToLower());
             if (product == null)
             {
@@ -127,12 +130,22 @@ namespace sklepMVCv2.Controllers
         public ActionResult Create([Bind(Include = "ProductID,Name,Description,Price,SmallImage,Image,Quantity,VatID")] Product product, HttpPostedFileBase imageName)
         {
 
+            var isDuplicated = db.Product.Where(p => p.Name.ToLower() == product.Name.ToLower());
+
+            if (isDuplicated.ToList().Count != 0)
+            {
+                ModelState.AddModelError("", "Pordukt o podanej nazwie istnieje w bazie!");
+            }
+
             if (ModelState.IsValid)
             {
-                
-                product.Image = new byte[imageName.ContentLength];
-                imageName.InputStream.Read(product.Image, 0, imageName.ContentLength);
-               
+                if (imageName != null)
+                {
+                    product.Image = new byte[imageName.ContentLength];
+                    imageName.InputStream.Read(product.Image, 0, imageName.ContentLength);
+
+                }
+
 
                 db.Product.Add(product);
                 db.SaveChanges();
@@ -155,7 +168,7 @@ namespace sklepMVCv2.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.VatID = new SelectList(db.Vat, "VatID", "VatID", product.VatID);
+            ViewBag.VatID = new SelectList(db.Vat, "VatID", "VatRate", product.VatID);
             return View(product);
         }
 
@@ -168,8 +181,12 @@ namespace sklepMVCv2.Controllers
         {
             if (ModelState.IsValid)
             {
-                product.Image = new byte[imageName.ContentLength];
-                imageName.InputStream.Read(product.Image, 0, imageName.ContentLength);
+                if (imageName != null)
+                {
+                    product.Image = new byte[imageName.ContentLength];
+                    imageName.InputStream.Read(product.Image, 0, imageName.ContentLength);
+
+                }
 
                 db.Entry(product).State = EntityState.Modified;
                 db.SaveChanges();
@@ -216,7 +233,7 @@ namespace sklepMVCv2.Controllers
 
         public ActionResult goToBucket()
         {
-        
+
             return RedirectToAction("Bucket");
         }
 

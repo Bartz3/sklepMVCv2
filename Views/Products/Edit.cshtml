@@ -88,7 +88,7 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.VatID, "VatID", htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.VatID, "Stawka VAT", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.DropDownList("VatID", null, htmlAttributes: new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.VatID, "", new { @class = "text-danger" })
@@ -103,9 +103,10 @@
     </div>
     }
 
-    <div>
-        @Html.ActionLink("Back to List", "Index")
-    </div>
+<div>
+    <input type="submit" value="Save" class="btn btn-default" />
+    <button type="button" class="btn btn-primary" onclick="location.href='@Url.Action("Index","Products")';return false;">Wróć do listy</button>
+</div>
 
     @section Scripts {
         @Scripts.Render("~/bundles/jqueryval")

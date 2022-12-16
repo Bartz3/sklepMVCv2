@@ -173,7 +173,10 @@
     <Compile Include="Controllers\CategoryProductsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\OrderProductsController.cs" />
+    <Compile Include="Controllers\OrdersController.cs" />
     <Compile Include="Controllers\ProductsController.cs" />
+    <Compile Include="Controllers\RolesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -293,8 +296,19 @@
     <Content Include="Views\CategoryProducts\Edit.cshtml" />
     <Content Include="Views\CategoryProducts\Index.cshtml" />
     <Content Include="Views\Products\UserView.cshtml" />
-    <Content Include="Views\Products\ShoppingCart.cshtml" />
+    <Content Include="Views\Orders\Create.cshtml" />
+    <Content Include="Views\Orders\Delete.cshtml" />
+    <Content Include="Views\Orders\Details.cshtml" />
+    <Content Include="Views\Orders\Edit.cshtml" />
+    <Content Include="Views\Orders\Index.cshtml" />
+    <Content Include="Views\OrderProducts\Create.cshtml" />
+    <Content Include="Views\OrderProducts\Delete.cshtml" />
+    <Content Include="Views\OrderProducts\Details.cshtml" />
+    <Content Include="Views\OrderProducts\Edit.cshtml" />
+    <Content Include="Views\OrderProducts\Index.cshtml" />
+    <Content Include="Views\Products\AddToCart.cshtml" />
     <Content Include="Views\Products\showCart.cshtml" />
+    <Content Include="Views\Roles\Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Migrations\202212012232575_init.resx">

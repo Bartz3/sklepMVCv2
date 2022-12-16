@@ -11,17 +11,19 @@
 
 @Styles.Render("~/Content/userView.css")
 
-<div class="olContent f1"><h2 style="color:black">Search Product/Category</h2></div>
+
 <form asp-action="UserView" method="get">
     <div class="form-actions no-color">
         <p>
-            Find by name: <input type="text" name="searchString" value="@ViewData["CurrentFilter"]" />
-            <input type="submit" value="Search" class="btn btn-default" /> |
-            <a href="/Products/UserView">Back to Full List</a>
+            Wyszukaj produkt <input type="text" name="searchString" value="@ViewData["CurrentFilter"]" />
+            <input type="submit" value="Szukaj" class="btn btn-default" /> 
+            <input type="button" value="Wróć do listy produktów" class="btn btn-default" onclick="location.href='/Products/UserView';" />
+
         </p>
     </div>
 </form>
-<table class="table table-bordered">
+<br />
+@*<table class="table table-bordered">
 
     @foreach (var item in Model)
     {
@@ -39,13 +41,46 @@
                 }
                 <h2>@Html.DisplayFor(modelItem => item.Name)</h2>
                 <p>Cena: @Html.DisplayFor(modelItem => item.Price) zł</p>
+             
                 <button type="button" onclick="location.href='@Url.Action("AddToCart","Products",item.ProductID)';return false;">Dodaj do koszyka</button>
             </td>
         </tr>
     }
+</table>*@
 
-</table>
+@foreach(var item in Model)
+            {
+                
+                <div class="col-md-4" style="border:1px solid grey">
+                    <div style="text-align: center; border-bottom: 2px solid maroon"> @*podkreślenie nazwy*@
+                        <h3 style="font-weight: bold">@item.Name</h3>
+                    </div>
+                    <div>
+                        <div class="col-md-8" style="align-self:center">
+                            @{
+                                if (item.Image != null)
+                                {
+                                    var base64 = Convert.ToBase64String(item.Image);
+                                    var imgsrc = string.Format("data:image/gif;base64,{0}", base64);
+                                    <img src='@imgsrc' width="150" height="150" />
+                                }
+                            }
+                        </div>
 
+                        <div class="col-md-8" style="font-size:18px;border-top:2px solid maroon;padding:2px"> @*podkreślenie nad przyciskiem*@
+                            <b>@item.Price zł</b>
+                        </div>
+                        <div class="col-md-4" style="text-align:right;margin-bottom:10px;border-top:2px solid maroon;padding:2px">
+                            @*<button class="w3-button w3-white w3-border w3-border-red w3-round-large " onclick="location.href='@Url.Action("AddToCart","Products",item.ProductID)'">Dodaj do koszyka</button>*@
+                            <button  class="btn btn-dark" onclick="location.href='@Url.Action("AddToCart",new { id = item.ProductID })';return false;">Dodaj do </button>
+                        </div>
+                    </div>
+                </div>
+                
+            }
+<div>
+
+</div>
 @*<table class="table">
         @foreach (var item2 in Model)
         {

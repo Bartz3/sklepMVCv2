@@ -31,9 +31,9 @@
             @Html.DisplayFor(modelItem => item.Product.Name)
         </td>
         <td>
-            <button type="button" class="btn btn-dark" onclick="location.href='@Url.Action("Delete", new { id = item.CategoryProductsID })';return false;">Usuń</button>
-            <button type="button" class="btn btn-dark" onclick="location.href='@Url.Action("Edit", new { id = item.CategoryProductsID })';return false;">Edytuj</button>
             <button type="button" class="btn btn-dark" onclick="location.href='@Url.Action("Details", new { id = item.CategoryProductsID })';return false;">Szczegóły</button>
+            <button type="button" class="btn btn-dark" onclick="location.href='@Url.Action("Edit", new { id = item.CategoryProductsID })';return false;">Edytuj</button>
+            <button type="button" class="btn btn-dark" onclick="location.href='@Url.Action("Delete", new { id = item.CategoryProductsID })';return false;">Usuń</button>
         </td>
     </tr>
 }

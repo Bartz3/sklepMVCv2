@@ -9,15 +9,18 @@
 <p>
     <button type="button" class="btn btn-primary" onclick="location.href='@Url.Action("Create","Products")';return false;">Dodaj nowy produkt</button>
 </p>
+
 <form asp-action="Index" method="get">
     <div class="form-actions no-color">
         <p>
-            Find by name: <input type="text" name="searchString" value="@ViewData["CurrentFilter"]" />
-            <input type="submit" value="Search" class="btn btn-default" /> |
-            <a asp-action="Index">Back to Full List</a>
+            Wyszukaj produkt <input type="text" name="searchString" value="@ViewData["CurrentFilter"]" />
+            <input type="submit" value="Szukaj" class="btn btn-default" />
+            <input type="button" value="Wróć do listy produktów" class="btn btn-default" onclick="location.href='/Products/Index';" />
+
         </p>
     </div>
 </form>
+
 <table class="table">
     <tr>
         <th>
