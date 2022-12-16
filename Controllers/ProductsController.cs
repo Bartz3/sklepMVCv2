@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Security.Cryptography;
@@ -104,6 +105,13 @@ namespace sklepMVCv2.Controllers
             }
             Product product = db.Product.Find(id);
 
+            var pdfFiles = db.ExtraFile.Where(x => x.ProductID == id).ToList();
+            var model = new ProductDetailsViewModel
+            {
+                Product = product,
+                PdfFiles = pdfFiles
+            };
+
             var categoryProducts = db.CategoryProducts.Include(c => c.Category).Where(p => p.ProductID == id).Select(p => p.Category.CategoryName).ToList();
 
             ViewBag.categories = categoryProducts;
@@ -112,7 +120,7 @@ namespace sklepMVCv2.Controllers
             {
                 return HttpNotFound();
             }
-            return View(product);
+            return View(model);
         }
 
         // GET: Products/Create
@@ -177,7 +185,7 @@ namespace sklepMVCv2.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ProductID,Name,Description,Price,SmallImage,Image,Quantity,VatID")] Product product, HttpPostedFileBase imageName)
+        public ActionResult Edit([Bind(Include = "ProductID,Name,Description,Price,SmallImage,Image,Quantity,VatID")] Product product, HttpPostedFileBase imageName, HttpPostedFileBase file, string fileName, string fileDescription)
         {
             if (ModelState.IsValid)
             {
@@ -186,6 +194,23 @@ namespace sklepMVCv2.Controllers
                     product.Image = new byte[imageName.ContentLength];
                     imageName.InputStream.Read(product.Image, 0, imageName.ContentLength);
 
+                }
+                if (file != null && file.ContentLength > 0)
+                {
+                    var pdf = new ExtraFile
+                    {
+                        Name = fileName,
+                        FileDescription = fileDescription,
+                        File = new byte[file.ContentLength],
+                        ProductID = product.ProductID,
+                        Product=product
+                    };
+                    file.InputStream.Read(pdf.File, 0, file.ContentLength);
+
+
+                    db.ExtraFile.Add(pdf);
+
+                 
                 }
 
                 db.Entry(product).State = EntityState.Modified;
@@ -235,6 +260,17 @@ namespace sklepMVCv2.Controllers
         {
 
             return RedirectToAction("Bucket");
+        }
+
+        public FileResult Download(int id)
+        {
+ 
+                var pdf = db.ExtraFile.Find(id);
+            var mimeType = "application/pdf";
+            return File(pdf.File, mimeType, pdf.Name+".pdf");
+
+            // code to download the PDF file goes here
+
         }
 
 

@@ -392,6 +392,7 @@
     <Compile Include="Models\Order.cs" />
     <Compile Include="Models\OrderProduct.cs" />
     <Compile Include="Models\Product.cs" />
+    <Compile Include="Models\ProductDetailsViewModel.cs" />
     <Compile Include="Models\Vat.cs" />
     <Compile Include="Models\VisitCount.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
