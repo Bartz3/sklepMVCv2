@@ -1,0 +1,19 @@
+﻿.log {
+    position: absolute;
+    transform: translate(-50%,-50%);
+    top: 50%;
+    left: 50%;
+    border: 3px solid black;
+    border-radius: 10px;
+    overflow: hidden;
+    perspective: 1px;
+    padding:50px;
+}
+
+.margin{
+    margin-bottom:20px !important;
+}
+
+.marginpassword {
+    margin-bottom: 20px !important;
+}

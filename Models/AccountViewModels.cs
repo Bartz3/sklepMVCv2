@@ -81,22 +81,22 @@ namespace sklepMVCv2.Models
         public string ConfirmPassword { get; set; }
 
         //Dodane
-        [Display(Name = "Imię")]
+        [Display(Name = "Name")]
         public string Name { get; set; }
 
-        [Display(Name = "Nazwisko")]
+        [Display(Name = "Surname")]
         public string Surname { get; set; }
 
-        [Display(Name = "Miasto")]
+        [Display(Name = "City")]
         public string City { get; set; }
 
-        [Display(Name = "Ulica")]
+        [Display(Name = "Street")]
         public string Street { get; set; }
 
-        [Display(Name="Numer mieszkania")]
+        [Display(Name="Number")]
         public int HouseNumber { get; set; }
 
-        [Display(Name = "Kod pocztowy")]
+        [Display(Name = "Zip code")]
         public string ZipCode { get; set; }
 
 
