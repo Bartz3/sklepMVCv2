@@ -418,6 +418,7 @@
     <Content Include="Content\bootstrap.rtl.min.css" />
     <Content Include="Content\cerulean.css" />
     <Content Include="Content\Login.css" />
+    <Content Include="Content\Register.css" />
     <Content Include="Content\userView.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
