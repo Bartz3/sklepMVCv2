@@ -3,6 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
     <title>Strona główna</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
@@ -71,16 +72,19 @@
                         <li>@Html.ActionLink("Tabela laczaca", "Index", "CategoryProducts")</li>
                         <li>@Html.ActionLink("Kategorie", "Index", "Categories")</li>
                         <li>@Html.ActionLink("Produkty - userView", "UserView", "Products")</li>
-                        <li>@Html.ActionLink("Koszyk", "showCart", "Products")</li>
                     </ul>
                     @Html.Partial("_LoginPartial")
+                <ul class="nav navbar-nav navbar-right">
+                    
+                    <li > @Html.ActionLink("Koszyk", "showCart", "Products")</i></li>
+                </ul>
                 </div>
             </div>
         </div>
     <div class="container body-content">
         @RenderBody()
         <hr />
-        <footer>
+        <footer style="text-align:center">
             <p>&copy; @DateTime.Now.Year -SklepMVC</p>
             Licznik odwiedzin sklepu:
             @Html.Action("ShowCounter", "Partial")

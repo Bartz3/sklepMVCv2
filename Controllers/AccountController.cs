@@ -399,6 +399,8 @@ namespace sklepMVCv2.Controllers
         public ActionResult LogOff()
         {
             AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
+            Response.Cookies["ShoppingCart"].Expires = DateTime.Now.AddDays(-1);
+
             return RedirectToAction("Index", "Home");
         }
 

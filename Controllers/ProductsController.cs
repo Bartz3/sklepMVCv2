@@ -66,7 +66,7 @@ namespace sklepMVCv2.Controllers
             ViewBag.test = cartCookie.Values;
 
             // Redirect to the shopping cart page
-            return View("showCart");
+            return RedirectToAction("showCart");
         }
         //Odczytywanie danych z koszyka
         public ActionResult showCart()
@@ -88,9 +88,9 @@ namespace sklepMVCv2.Controllers
                         products.Add(product);
                     }
                 }
-
+                TempData["userCart"] = products;
                 // Pass the list of products to the view
-                if(products!=null)
+                if (products!=null)
                     return View(products.ToList());
             }
             return View("showCart");
@@ -265,7 +265,7 @@ namespace sklepMVCv2.Controllers
         public FileResult Download(int id)
         {
  
-                var pdf = db.ExtraFile.Find(id);
+            var pdf = db.ExtraFile.Find(id);
             var mimeType = "application/pdf";
             return File(pdf.File, mimeType, pdf.Name+".pdf");
 

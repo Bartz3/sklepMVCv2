@@ -6,6 +6,7 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using Microsoft.AspNet.Identity;
 using sklepMVCv2.Models;
 
 namespace sklepMVCv2.Controllers
@@ -15,6 +16,44 @@ namespace sklepMVCv2.Controllers
         private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: Orders
+
+
+        public ActionResult Summary()
+        {
+            List<Product> userCart = TempData["userCart"] as List<Product>;
+            ViewBag.User=User.Identity.GetUserName();
+            string[] paymentStrings = { "Za pobraniem", "BLIK", "Karta kredytowa", "Przelew tradycyjny","PayPal" };
+            ViewBag.paymentMethod = new SelectList(paymentStrings);
+
+            Order order = new Order();
+            decimal totalPrice = 0;
+            if(userCart != null)
+                foreach (var item in userCart)
+                {
+                    totalPrice+= item.Price;
+                }
+
+            order.TotalPrice = totalPrice;
+            order.User = getUser();
+            ;
+
+            return View(userCart);
+        }
+        [HttpPost]
+        public ActionResult confirmSummary()
+        {
+
+
+            return View("Products/UserView");
+        }
+
+        public ApplicationUser getUser()
+        {
+            ApplicationUser user;
+            var userId = User.Identity.GetUserId(); // Logged user ID
+            user= db.Users.Find(userId);
+            return user;
+        }
         public ActionResult Index()
         {
             return View(db.Order.ToList());

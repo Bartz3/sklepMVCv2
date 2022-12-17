@@ -19,7 +19,7 @@ namespace sklepMVCv2.Models
         public int UserID { get; set; }
         [Required]
         [Display(Name = "Cena całkowita")]
-        public double TotalPrice { get; set; }
+        public decimal TotalPrice { get; set; }
         [Required]
         [MaxLength(50)]
         [Display(Name = "Metoda płatności")]
