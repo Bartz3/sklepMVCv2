@@ -25,26 +25,39 @@ namespace sklepMVCv2.Controllers
             string[] paymentStrings = { "Za pobraniem", "BLIK", "Karta kredytowa", "Przelew tradycyjny","PayPal" };
             ViewBag.paymentMethod = new SelectList(paymentStrings);
 
-            Order order = new Order();
-            decimal totalPrice = 0;
-            if(userCart != null)
-                foreach (var item in userCart)
-                {
-                    totalPrice+= item.Price;
-                }
 
-            order.TotalPrice = totalPrice;
-            order.User = getUser();
-            ;
 
             return View(userCart);
         }
-        [HttpPost]
-        public ActionResult confirmSummary()
+        
+        public ActionResult confirmSummary(FormCollection form)
         {
 
+            string xd = form["paymentMethod"].ToString();
+            List<Product> userCart = TempData["userCart"] as List<Product>;
+            Order order = new Order();
+            OrderProduct orderProduct = new OrderProduct();
+            decimal totalPrice = 0;
+            if (userCart != null)
+                foreach (var item in userCart)
+                {
+                    totalPrice += item.Price;
+                    orderProduct.Product = item;
+                    orderProduct.Amount = 1;
+                    //orderProduct.Order =;
+                }
 
-            return View("Products/UserView");
+            order.TotalPrice = totalPrice;
+            order.Status = "Przyjęte";
+            //order.OrderProduct =;
+            //order.OrderID =;
+            //order.PaymentMethod = form["paymentMethod"].ToString();
+
+
+            order.User = getUser();
+            ;
+
+            return View("Products/Index");
         }
 
         public ApplicationUser getUser()

@@ -462,7 +462,6 @@
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
-    <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Products\Create.cshtml" />
     <Content Include="Views\Products\Delete.cshtml" />
     <Content Include="Views\Products\Details.cshtml" />
@@ -494,6 +493,8 @@
     <Content Include="Views\Roles\Create.cshtml" />
     <Content Include="Views\Partial\ShowCounter.cshtml" />
     <Content Include="Views\Orders\Summary.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Orders\confirmSummary.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Migrations\202212012232575_init.resx">

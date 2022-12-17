@@ -9,50 +9,6 @@
     @Scripts.Render("~/bundles/modernizr")
 </head>
 <body>
-    <!--<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-        <div class="container-fluid">
-            <a class="navbar-brand" href="#">Sklep MVC</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarColor01">
-                <ul class="navbar-nav me-auto">
-                    <li class="nav-item active">
-                        <a class="nav-link" href="@Url.Action("Index", "Products")">
-                            Strona główna
-                            <span class="visually-hidden">(current)</span>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="@Url.Action("Index", "Products")">Produkty</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="@Url.Action("Index", "Categories")">Kategorie</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="@Url.Action("Index", "CategoryProducts")">Łącznik</a>
-                    </li>
-                    <li class="nav-item">
-                       @Html.Partial("_LoginPartial")
-                    </li>-->
-                    @*<li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="true">Dd</a>
-                        <div class="dropdown-menu">
-                            <a class="dropdown-item" href="#">Action</a>
-                            <a class="dropdown-item" href="#">Another action</a>
-                            <a class="dropdown-item" href="#">Something else here</a>
-                            <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="#">Separated link</a>
-                        </div>
-                    </li>*@
-                <!--</ul>
-                <form class="d-flex">
-                    <input class="form-control me-sm-2" type="text" placeholder="Wpisz nazwę">
-                    <button class="btn btn-secondary my-2 my-sm-0" type="submit">Szukaj produktu</button>
-                </form>
-            </div>
-        </div>
-    </nav>-->
     <div class="navbar navbar-inverse navbar-fixed-top">
             <div class="container">
                 <div class="navbar-header">
@@ -61,7 +17,7 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    @Html.ActionLink("Sklep MVC", "Index", "Products", new { area = "" }, new { @class = "navbar-brand" })
+                    @Html.ActionLink("Sklep MVC", "UserView", "Products", new { area = "" }, new { @class = "navbar-brand" })
                 </div>
 
                 <div class="navbar-collapse collapse">
