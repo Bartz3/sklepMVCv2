@@ -189,12 +189,15 @@ namespace sklepMVCv2.Controllers
         {
             if (ModelState.IsValid)
             {
+
+                var existingProduct = db.Product.Find(product.ProductID);
                 if (imageName != null)
                 {
-                    product.Image = new byte[imageName.ContentLength];
-                    imageName.InputStream.Read(product.Image, 0, imageName.ContentLength);
+                    existingProduct.Image = new byte[imageName.ContentLength];
+                    imageName.InputStream.Read(existingProduct.Image, 0, imageName.ContentLength);
 
                 }
+
                 if (file != null && file.ContentLength > 0)
                 {
                     var pdf = new ExtraFile
@@ -202,8 +205,8 @@ namespace sklepMVCv2.Controllers
                         Name = fileName,
                         FileDescription = fileDescription,
                         File = new byte[file.ContentLength],
-                        ProductID = product.ProductID,
-                        Product=product
+                        ProductID = existingProduct.ProductID,
+                        Product=existingProduct
                     };
                     file.InputStream.Read(pdf.File, 0, file.ContentLength);
 
@@ -213,7 +216,7 @@ namespace sklepMVCv2.Controllers
                  
                 }
 
-                db.Entry(product).State = EntityState.Modified;
+                db.Entry(existingProduct).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
