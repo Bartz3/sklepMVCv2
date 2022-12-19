@@ -17,7 +17,7 @@ namespace sklepMVCv2.Controllers
 
         // GET: Orders
 
-
+        
         public ActionResult Summary()
         {
             List<Product> userCart = TempData["userCart"] as List<Product>;
@@ -26,24 +26,49 @@ namespace sklepMVCv2.Controllers
             ViewBag.paymentMethod = new SelectList(paymentStrings);
 
 
-
             return View(userCart);
         }
-        
-        public ActionResult confirmSummary(FormCollection form)
+
+        [HttpPost]
+        public ActionResult Summary(int d)
         {
 
-            string xd = form["paymentMethod"].ToString();
+
+            return RedirectToAction("confirmSummary");
+        }
+
+
+            public ActionResult confirmSummary()
+        {
+            var form = Request.Form;
+            string selectedValue = form["paymentMethod"];
+            string xd = Request["paymentMethod"].ToString();
+            string xd2 = Request.Form["paymentMethod"].ToString();
+            string xd3 = Request.Form["paymentMethod"].ToString();
             List<Product> userCart = TempData["userCart"] as List<Product>;
             Order order = new Order();
-            OrderProduct orderProduct = new OrderProduct();
+            List<OrderProduct> orderProductList = new List<OrderProduct>();
+            OrderProduct orderProduct;
             decimal totalPrice = 0;
+            int maxId;
+            if (db.Order != null)
+            {
+             maxId = db.Order.Select(o => o.OrderID).Max();
+            }
+            else
+            {
+                maxId = 0;
+            }
+
             if (userCart != null)
                 foreach (var item in userCart)
                 {
                     totalPrice += item.Price;
+
+                    orderProduct=new OrderProduct();
                     orderProduct.Product = item;
                     orderProduct.Amount = 1;
+                    
                     //orderProduct.Order =;
                 }
 
@@ -51,7 +76,7 @@ namespace sklepMVCv2.Controllers
             order.Status = "Przyjęte";
             //order.OrderProduct =;
             //order.OrderID =;
-            //order.PaymentMethod = form["paymentMethod"].ToString();
+            order.PaymentMethod = form["paymentMethod"];
 
 
             order.User = getUser();
@@ -80,6 +105,8 @@ namespace sklepMVCv2.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             Order order = db.Order.Find(id);
+
+            
             if (order == null)
             {
                 return HttpNotFound();

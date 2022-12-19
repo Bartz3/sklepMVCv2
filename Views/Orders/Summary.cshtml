@@ -6,7 +6,7 @@
 <h2>Podsumowanie</h2>
 @Styles.Render("~/Content/cartView.css")
 <h3>
-Zamówienia użytkownika: @ViewBag.User
+    Zamówienia użytkownika: @ViewBag.User
 
 </h3>
 <table>
@@ -40,10 +40,18 @@ Zamówienia użytkownika: @ViewBag.User
     }
 </table>
 
- Metoda płatności:   @Html.DropDownList("paymentMethod", null, htmlAttributes: new { @class = "form-control" })
+@using (Html.BeginForm("confirmSummary", "Orders"))
+    {
+    @Html.AntiForgeryToken()
+    <div>
+        Metoda płatności:   @Html.DropDownList("paymentMethod", null, htmlAttributes: new { @class = "form-control" })
+        <br />
+        <button class="btn btn-info ">Potwierdź zamówienie </button>
+    </div> 
+
+    }
 
 <br />
-<button class="btn btn-info " onclick="location.href='@Url.Action("confirmSummary","Orders")';return false;">Potwierdź zamówienie </button>
 <div class="form-group">
     <div class="col-md-10">
     </div>

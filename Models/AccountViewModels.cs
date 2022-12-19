@@ -55,10 +55,10 @@ namespace sklepMVCv2.Models
 
         [Required]
         [DataType(DataType.Password)]
-        [Display(Name = "Password")]
+        [Display(Name = "Hasło")]
         public string Password { get; set; }
 
-        [Display(Name = "Remember me?")]
+        [Display(Name = "Zapamiętaj mnie")]
         public bool RememberMe { get; set; }
     }
 
@@ -70,33 +70,33 @@ namespace sklepMVCv2.Models
         public string Email { get; set; }
 
         [Required]
-        [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
+        [StringLength(100, ErrorMessage = "Hasło {0} musi mieć minimum {2} znaków.", MinimumLength = 6)]
         [DataType(DataType.Password)]
-        [Display(Name = "Password")]
+        [Display(Name = "Hasło")]
         public string Password { get; set; }
 
         [DataType(DataType.Password)]
-        [Display(Name = "Confirm password")]
-        [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
+        [Display(Name = "Potwierdź hasło")]
+        [Compare("Password", ErrorMessage = "Hasła nie zgadzają się ze sobą.")]
         public string ConfirmPassword { get; set; }
 
         //Dodane
-        [Display(Name = "Name")]
+        [Display(Name = "Imię")]
         public string Name { get; set; }
 
-        [Display(Name = "Surname")]
+        [Display(Name = "Nazwisko")]
         public string Surname { get; set; }
 
-        [Display(Name = "City")]
+        [Display(Name = "Miasto")]
         public string City { get; set; }
 
-        [Display(Name = "Street")]
+        [Display(Name = "Ulica")]
         public string Street { get; set; }
 
-        [Display(Name="Number")]
+        [Display(Name="Numer domu")]
         public int HouseNumber { get; set; }
 
-        [Display(Name = "Zip code")]
+        [Display(Name = "Numer pocztowy")]
         public string ZipCode { get; set; }
 
 
