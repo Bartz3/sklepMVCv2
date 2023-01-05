@@ -26,6 +26,9 @@
         <th>
             @Html.DisplayNameFor(model => model.PaymentMethod)
         </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ShippingMethod)
+        </th>
         <th></th>
     </tr>
 
@@ -45,6 +48,9 @@
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.PaymentMethod)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ShippingMethod)
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.OrderID }) |

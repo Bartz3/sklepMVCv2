@@ -15,15 +15,16 @@ namespace sklepMVCv2.Controllers
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
-        // GET: Orders
-
-        
         public ActionResult Summary()
         {
             List<Product> userCart = TempData["userCart"] as List<Product>;
-            ViewBag.User=User.Identity.GetUserName();
-            string[] paymentStrings = { "Za pobraniem", "BLIK", "Karta kredytowa", "Przelew tradycyjny","PayPal" };
+            ViewBag.User = User.Identity.GetUserName();
+
+            string[] paymentStrings = { "Za pobraniem", "BLIK", "Karta kredytowa", "Przelew tradycyjny", "PayPal" };
             ViewBag.paymentMethod = new SelectList(paymentStrings);
+
+            string[] shippingStrings = { "Odbiór w salonie", "Inpost-paczkomaty", "Kurier DPD", "Kurier UPS", "Kurier FedEx", "Poczta Polska" };
+            ViewBag.shippingMethod = new SelectList(shippingStrings);
 
 
             return View(userCart);
@@ -36,50 +37,116 @@ namespace sklepMVCv2.Controllers
 
             return RedirectToAction("confirmSummary");
         }
-
-
-            public ActionResult confirmSummary()
+        public void SaveOrderToDB()
         {
             var form = Request.Form;
-            string selectedValue = form["paymentMethod"];
-            string xd = Request["paymentMethod"].ToString();
-            string xd2 = Request.Form["paymentMethod"].ToString();
-            string xd3 = Request.Form["paymentMethod"].ToString();
-            List<Product> userCart = TempData["userCart"] as List<Product>;
-            Order order = new Order();
-            List<OrderProduct> orderProductList = new List<OrderProduct>();
-            OrderProduct orderProduct;
-            decimal totalPrice = 0;
-            int maxId;
-            if (db.Order != null)
+            using (var context = new ApplicationDbContext())
             {
-             maxId = db.Order.Select(o => o.OrderID).Max();
-            }
-            else
-            {
-                maxId = 0;
-            }
-
-            if (userCart != null)
-                foreach (var item in userCart)
+                // Order -> Date, Status, UserID, TotalPrice, PaymentMethod,ShippingMethod, List<OrderProduct> ???, User
+                var order = new Order()
                 {
-                    totalPrice += item.Price;
-
-                    orderProduct=new OrderProduct();
-                    orderProduct.Product = item;
-                    orderProduct.Amount = 1;
+                    Date = DateTime.Now,
+                    Status = OrderStatus.Nowe.ToString(),
+                    PaymentMethod = form["paymentMethod"],
+                    ShippingMethod = form["shippingMethod"],
+                    User = getUser(),
+                    UserID=1337,
                     
-                    //orderProduct.Order =;
-                }
+            };
 
-            order.TotalPrice = totalPrice;
-            order.Status = "Przyjęte";
-            //order.OrderProduct =;
-            //order.OrderID =;
-            order.PaymentMethod = form["paymentMethod"];
+                var orderProducts = new List<OrderProduct>();
+                orderProducts = GetOrderProducts(order);
+
+                order.TotalPrice = costOfOrder();
+                order.OrderProduct = orderProducts;
+              
+          
+                context.Order.Add(order);
+                context.SaveChanges();
+            }
+        }
+        public decimal costOfOrder() {
+            List<Product> userCart = TempData["userCart"] as List<Product>;
+            decimal output = 0;
+            foreach (var product in userCart)
+            {
+                output+= product.Price;
+            }
+            return output;
+        }
+        public List<OrderProduct> GetOrderProducts(Order order)
+        {
+            List<Product> userCart = TempData["userCart"] as List<Product>;
+            OrderProduct orderProduct;
+            List<OrderProduct> output=new List<OrderProduct>();
+            foreach (var product in userCart)
+            {
+                orderProduct = new OrderProduct();
+                orderProduct.Amount = 1;
+                orderProduct.ProductID = product.ProductID;
+                orderProduct.Product = product;
+                orderProduct.Order = order;
+                orderProduct.OrderID = order.OrderID;
+
+                output.Add(orderProduct);
+                //db.OrderProduct.Add(orderProduct);
+            }
+            return output;
+
+        }
+        public ActionResult confirmSummary()
+        {
+            SaveOrderToDB();
+            //var form = Request.Form;
+            //string selectedValue = form["paymentMethod"];
+            //List<Product> userCart = TempData["userCart"] as List<Product>;
+
+            //List<OrderProduct> orderProductList = new List<OrderProduct>();
+            //OrderProduct orderProduct;
+
+            //int orderId;
+            //if (db.Order != null)
+            //{
+            //    orderId = db.Order.Select(o => o.OrderID).Max() + 1;
+            //}
+            //else
+            //{
+            //    orderId = 0;
+            //}
+            //// Tabela OrderProduct -> OrderProductID - PK, 1.Amount - int, 2.ProductID - id produktu,
+            //// 3.OrderID - id zamówienia, 4.Order - zamówienie, Product- produkt
+            //decimal totalPrice = 0;
+
+            //foreach (var product in userCart)
+            //{
+            //    orderProduct = new OrderProduct();
+            //    orderProduct.Amount = 1;
+            //    orderProduct.ProductID = product.ProductID;
+            //    orderProduct.Product = product;
+            //    //orderproduct.Order=??
+            //    orderProduct.OrderID = orderId;
+
+            //    totalPrice += product.Price * orderProduct.Amount; // Cena koszyka
+            //    //db.OrderProduct.Add(orderProduct);
+            //}
+
+            ////db.SaveChanges();
+
+            //// Order -> Date, Status, UserID, TotalPrice, PaymentMethod,ShippingMethod, List<OrderProduct> ???, User
+            //Order order = new Order();
+
+            //order.Date = DateTime.Now;
+            //order.TotalPrice = totalPrice;
+            //order.Status = "Przyjęte";
+            //order.Status = OrderStatus.Nowe.ToString();
+            ////order.OrderProduct =;
+            ////order.OrderID =;
+            //order.PaymentMethod = form["paymentMethod"];
+            //order.ShippingMethod = form["shippingMethod"];
 
 
-            order.User = getUser();
+            //order.User = getUser();
+
             ;
 
             return View("Products/Index");
@@ -89,9 +156,13 @@ namespace sklepMVCv2.Controllers
         {
             ApplicationUser user;
             var userId = User.Identity.GetUserId(); // Logged user ID
-            user= db.Users.Find(userId);
+            user = db.Users.Find(userId);
+            
+            var address = user.Street;
             return user;
         }
+
+        // GET: Orders
         public ActionResult Index()
         {
             return View(db.Order.ToList());
@@ -105,8 +176,6 @@ namespace sklepMVCv2.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             Order order = db.Order.Find(id);
-
-            
             if (order == null)
             {
                 return HttpNotFound();
@@ -125,7 +194,7 @@ namespace sklepMVCv2.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "OrderID,Date,Status,UserID,TotalPrice,PaymentMethod")] Order order)
+        public ActionResult Create([Bind(Include = "OrderID,Date,Status,UserID,TotalPrice,PaymentMethod,ShippingMethod")] Order order)
         {
             if (ModelState.IsValid)
             {
@@ -157,7 +226,7 @@ namespace sklepMVCv2.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "OrderID,Date,Status,UserID,TotalPrice,PaymentMethod")] Order order)
+        public ActionResult Edit([Bind(Include = "OrderID,Date,Status,UserID,TotalPrice,PaymentMethod,ShippingMethod")] Order order)
         {
             if (ModelState.IsValid)
             {

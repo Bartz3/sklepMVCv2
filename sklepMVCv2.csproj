@@ -386,6 +386,10 @@
     <Compile Include="Migrations\202212171228381_doubleChangeInTotalPriceOrder.designer.cs">
       <DependentUpon>202212171228381_doubleChangeInTotalPriceOrder.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202301021921319_shippingMethodInOrdersAdded.cs" />
+    <Compile Include="Migrations\202301021921319_shippingMethodInOrdersAdded.designer.cs">
+      <DependentUpon>202301021921319_shippingMethodInOrdersAdded.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Category.cs" />
@@ -479,11 +483,6 @@
     <Content Include="Views\CategoryProducts\Edit.cshtml" />
     <Content Include="Views\CategoryProducts\Index.cshtml" />
     <Content Include="Views\Products\UserView.cshtml" />
-    <Content Include="Views\Orders\Create.cshtml" />
-    <Content Include="Views\Orders\Delete.cshtml" />
-    <Content Include="Views\Orders\Details.cshtml" />
-    <Content Include="Views\Orders\Edit.cshtml" />
-    <Content Include="Views\Orders\Index.cshtml" />
     <Content Include="Views\OrderProducts\Create.cshtml" />
     <Content Include="Views\OrderProducts\Delete.cshtml" />
     <Content Include="Views\OrderProducts\Details.cshtml" />
@@ -493,14 +492,18 @@
     <Content Include="Views\Products\showCart.cshtml" />
     <Content Include="Views\Roles\Create.cshtml" />
     <Content Include="Views\Partial\ShowCounter.cshtml" />
-    <Content Include="Views\Orders\Summary.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\Orders\confirmSummary.cshtml" />
     <Content Include="Views\Complaints\Create.cshtml" />
     <Content Include="Views\Complaints\Delete.cshtml" />
     <Content Include="Views\Complaints\Details.cshtml" />
     <Content Include="Views\Complaints\Edit.cshtml" />
     <Content Include="Views\Complaints\Index.cshtml" />
+    <Content Include="Views\Orders\Create.cshtml" />
+    <Content Include="Views\Orders\Delete.cshtml" />
+    <Content Include="Views\Orders\Details.cshtml" />
+    <Content Include="Views\Orders\Edit.cshtml" />
+    <Content Include="Views\Orders\Index.cshtml" />
+    <Content Include="Views\Orders\Summary.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Migrations\202212012232575_init.resx">
@@ -523,6 +526,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202212171228381_doubleChangeInTotalPriceOrder.resx">
       <DependentUpon>202212171228381_doubleChangeInTotalPriceOrder.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202301021921319_shippingMethodInOrdersAdded.resx">
+      <DependentUpon>202301021921319_shippingMethodInOrdersAdded.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

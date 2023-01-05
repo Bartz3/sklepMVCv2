@@ -1,5 +1,4 @@
-﻿
-@{
+﻿@{
     ViewBag.Title = "Summary";
 }
 
@@ -7,6 +6,7 @@
 @Styles.Render("~/Content/cartView.css")
 <h3>
     Zamówienia użytkownika: @ViewBag.User
+    
 
 </h3>
 <table>
@@ -39,17 +39,21 @@
 
     }
 </table>
-
+<br />
 @using (Html.BeginForm("confirmSummary", "Orders"))
-    {
+{
     @Html.AntiForgeryToken()
     <div>
         Metoda płatności:   @Html.DropDownList("paymentMethod", null, htmlAttributes: new { @class = "form-control" })
         <br />
-        <button class="btn btn-info ">Potwierdź zamówienie </button>
-    </div> 
+    </div>
 
-    }
+    <div>
+        Sposób dostawy:   @Html.DropDownList("shippingMethod", null, htmlAttributes: new { @class = "form-control" })
+        <br />
+    </div>
+    <button class="btn btn-info ">Potwierdź zamówienie </button>
+}
 
 <br />
 <div class="form-group">

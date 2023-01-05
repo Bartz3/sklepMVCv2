@@ -6,6 +6,7 @@ using System.Web;
 
 namespace sklepMVCv2.Models
 {
+    
     public class OrderProduct
     {
         public int OrderProductID { get; set; }
