@@ -504,6 +504,7 @@
     <Content Include="Views\Orders\Edit.cshtml" />
     <Content Include="Views\Orders\Index.cshtml" />
     <Content Include="Views\Orders\Summary.cshtml" />
+    <Content Include="Views\Orders\confirmSummary.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Migrations\202212012232575_init.resx">

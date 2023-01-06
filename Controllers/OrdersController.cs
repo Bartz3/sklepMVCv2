@@ -30,13 +30,13 @@ namespace sklepMVCv2.Controllers
             return View(userCart);
         }
 
-        [HttpPost]
-        public ActionResult Summary(int d)
-        {
+        //[HttpPost]
+        //public ActionResult Summary(int d)
+        //{
 
 
-            return RedirectToAction("confirmSummary");
-        }
+        //    return RedirectToAction("confirmSummary");
+        //}
         public void SaveOrderToDB()
         {
             var form = Request.Form;
@@ -66,7 +66,7 @@ namespace sklepMVCv2.Controllers
             }
         }
         public decimal costOfOrder() {
-            List<Product> userCart = TempData["userCart"] as List<Product>;
+            List<Product> userCart = getProductsFromBucket();
             decimal output = 0;
             foreach (var product in userCart)
             {
@@ -74,11 +74,13 @@ namespace sklepMVCv2.Controllers
             }
             return output;
         }
-        public List<OrderProduct> GetOrderProducts(Order order)
+        public List<OrderProduct> GetOrderProducts(Order order) // Products -> OrderProducts
         {
-            List<Product> userCart = TempData["userCart"] as List<Product>;
+
             OrderProduct orderProduct;
             List<OrderProduct> output=new List<OrderProduct>();
+
+            var userCart = getProductsFromBucket();
             foreach (var product in userCart)
             {
                 orderProduct = new OrderProduct();
@@ -94,12 +96,34 @@ namespace sklepMVCv2.Controllers
             return output;
 
         }
-        public ActionResult confirmSummary()
+        public List<Product> getProductsFromBucket()
         {
+            var cartCookie = Request.Cookies["ShoppingCart"];
+            var userCart = new List<Product>();
+            if (cartCookie != null)
+            {
+                // Create a list to store the products
+
+                // Iterate over the cookie values
+                foreach (var key in cartCookie.Values.AllKeys)
+                {
+                    // Retrieve the product from the database using the key (product ID)
+                    var product = db.Product.Find(int.Parse(key));
+                    if (product != null)
+                    {
+                        // Add the product to the list
+                        userCart.Add(product);
+                    }
+                }
+                // Pass the list of products to the view
+            }
+            return userCart;
+        }
+        
+        public ActionResult confirmSummary()
+        { 
+        
             SaveOrderToDB();
-            //var form = Request.Form;
-            //string selectedValue = form["paymentMethod"];
-            //List<Product> userCart = TempData["userCart"] as List<Product>;
 
             //List<OrderProduct> orderProductList = new List<OrderProduct>();
             //OrderProduct orderProduct;
@@ -146,8 +170,6 @@ namespace sklepMVCv2.Controllers
 
 
             //order.User = getUser();
-
-            ;
 
             return View("Products/Index");
         }
