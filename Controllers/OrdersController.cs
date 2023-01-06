@@ -40,8 +40,8 @@ namespace sklepMVCv2.Controllers
         public void SaveOrderToDB()
         {
             var form = Request.Form;
-            using (var context = new ApplicationDbContext())
-            {
+
+            
                 // Order -> Date, Status, UserID, TotalPrice, PaymentMethod,ShippingMethod, List<OrderProduct> ???, User
                 var order = new Order()
                 {
@@ -59,11 +59,11 @@ namespace sklepMVCv2.Controllers
 
                 order.TotalPrice = costOfOrder();
                 order.OrderProduct = orderProducts;
-              
-          
-                context.Order.Add(order);
-                context.SaveChanges();
-            }
+                 var user = getUser();
+                user.Order.Add(order);
+                db.Order.Add(order);
+                db.SaveChanges();
+            
         }
         public decimal costOfOrder() {
             List<Product> userCart = getProductsFromBucket();
@@ -168,10 +168,11 @@ namespace sklepMVCv2.Controllers
             //order.PaymentMethod = form["paymentMethod"];
             //order.ShippingMethod = form["shippingMethod"];
 
+            var product = db.Product.Include(p => p.Vat);
 
             //order.User = getUser();
 
-            return View("Products/Index");
+            return View("~/Views/Products/Index.cshtml", product.ToList());
         }
 
         public ApplicationUser getUser()

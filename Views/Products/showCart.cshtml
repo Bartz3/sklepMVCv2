@@ -35,8 +35,10 @@
 
                     </td>
                     <td>@product.Price zł</td>
+                    <td> <button class="btn btn-info " onclick="location.href='@Url.Action("RemoveFromBasket","Products", new { id = product.ProductID })';return false;">Usuń z koszyka</button></td>
                 </tr>
                 sum += product.Price;
+               
             }
             <h4>Suma zakupów: @sum zł</h4>
 
@@ -55,6 +57,7 @@ else
     <h3>Koszyk jest pusty</h3>
     <button class="btn btn-info " onclick="location.href='@Url.Action("UserView","Products")';return false;">Wróć do listy produktów </button>
 }
+
 
 
 

@@ -10,6 +10,8 @@ using System.Security.Cryptography;
 using System.Web;
 using System.Web.Helpers;
 using System.Web.Mvc;
+using Newtonsoft.Json;
+using System.Web.UI.WebControls.WebParts;
 using sklepMVCv2.Models;
 
 namespace sklepMVCv2.Controllers
@@ -163,6 +165,46 @@ namespace sklepMVCv2.Controllers
             ViewBag.VatID = new SelectList(db.Vat, "VatID", "VatID", product.VatID);
             return View(product);
         }
+        public ActionResult RemoveFromBasket(int id)
+        {
+            
+                // Pobierz ciasteczko z koszykiem
+                var cartCookie = Request.Cookies["ShoppingCart"];
+
+
+                // Deserializuj ciasteczko do obiektu koszyka
+
+
+                cartCookie.Values.Remove(id.ToString());
+
+            // Usuń pojedynczy element z koszyka
+            //var ptr = cart.Find(p => p.ProductID == id);
+             //   cart.Remove(ptr);
+
+                // Serializuj koszyk do ciasteczka i ustaw je
+             
+                Response.Cookies.Set(cartCookie);
+
+            // Przekieruj użytkownika do widoku z koszykiem
+            var products = new List<Product>();
+
+            // Iterate over the cookie values
+            foreach (var key in cartCookie.Values.AllKeys)
+            {
+                // Retrieve the product from the database using the key (product ID)
+                var product = db.Product.Find(int.Parse(key));
+                if (product != null)
+                {
+                    // Add the product to the list
+                    products.Add(product);
+                }
+            }
+           // TempData["userCart"] = products;
+            // Pass the list of products to the view
+                return View("showCart", products.ToList());
+
+
+        }
 
         // GET: Products/Edit/5
         public ActionResult Edit(int? id)
@@ -191,6 +233,13 @@ namespace sklepMVCv2.Controllers
             {
 
                 var existingProduct = db.Product.Find(product.ProductID);
+                existingProduct.Name = product.Name;
+                existingProduct.Description = product.Description;
+                existingProduct.Price = product.Price;
+                existingProduct.Quantity = product.Quantity;
+                existingProduct.VatID = product.VatID;
+
+                //existingProduct = product;
                 if (imageName != null)
                 {
                     existingProduct.Image = new byte[imageName.ContentLength];
@@ -215,7 +264,6 @@ namespace sklepMVCv2.Controllers
 
                  
                 }
-
                 db.Entry(existingProduct).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
