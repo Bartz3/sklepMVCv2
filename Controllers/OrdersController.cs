@@ -30,13 +30,6 @@ namespace sklepMVCv2.Controllers
             return View(userCart);
         }
 
-        //[HttpPost]
-        //public ActionResult Summary(int d)
-        //{
-
-
-        //    return RedirectToAction("confirmSummary");
-        //}
         public void SaveOrderToDB()
         {
             var form = Request.Form;

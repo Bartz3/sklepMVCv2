@@ -23,6 +23,8 @@ katalogowa). Ka¿dy plik posiada swój opis. Liczba plików nie jest ograniczona – 
 • licznik odwiedzin sklepu – 2 pkt. ZROBIONE
 
 • wyszukiwanie proste na podstawie podanych s³ów kluczowych – 2 pkt. ZROBIONE
+
+• mo¿liwoœæ wyboru sposobu p³atnoœci i sposobu wysy³ki zakupionych produktów – 2 pkt. -> ZROBIONE
 ------------------------------------------------------------------------------------------------------------------------------------------
 • wpisywanie stawek podatku VAT na ka¿dy produkt. Stawka jest wybierana z listy prawnie
 obowi¹zuj¹cych stawek. Odró¿nienie stawki zerowej od zwolnienia. Wyœwietlanie cen netto
@@ -32,7 +34,6 @@ je¿eli u¿ytkownik ustawi tak¹ opcjê w profilu – 2pkt. -> Stawki VAT bez mo¿liwoœ
 do wysy³ki. Mo¿liwoœæ zalogowania siê na swoje konto. Zarz¹dzanie klientami przez
 administratora – 4 pkt. -> Brak zarz¹dzania klientami
 
-• mo¿liwoœæ wyboru sposobu p³atnoœci i sposobu wysy³ki zakupionych produktów – 2 pkt. -> Mo¿liwy wybór p³atnoœci
 
 • zapisywanie danych zamówienia wraz z poszczególnymi pozycjami w bazie. Ka¿de
 zamówienie mo¿e byæ w jednym ze stanów: nowe, w trakcie realizacji, zrealizowane,

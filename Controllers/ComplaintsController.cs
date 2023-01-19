@@ -17,6 +17,7 @@ namespace sklepMVCv2.Controllers
         // GET: Complaints
         public ActionResult Index()
         {
+            
             return View(db.Complaint.ToList());
         }
 
