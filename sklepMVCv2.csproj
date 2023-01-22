@@ -390,6 +390,10 @@
     <Compile Include="Migrations\202301021921319_shippingMethodInOrdersAdded.designer.cs">
       <DependentUpon>202301021921319_shippingMethodInOrdersAdded.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202301212007100_userIDtoString.cs" />
+    <Compile Include="Migrations\202301212007100_userIDtoString.designer.cs">
+      <DependentUpon>202301212007100_userIDtoString.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Category.cs" />
@@ -418,6 +422,10 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\cartView.css" />
     <Content Include="Content\cerulean.css" />
+    <Content Include="Content\checkUserOrder.css" />
+    <Content Include="Content\Login.css" />
+    <Content Include="Content\manageIndex.css" />
+    <Content Include="Content\Register.css" />
     <Content Include="Content\userView.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
@@ -436,6 +444,8 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="Static_files\store.png" />
+    <Content Include="Static_files\user.png" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -505,6 +515,8 @@
     <Content Include="Views\Orders\Index.cshtml" />
     <Content Include="Views\Orders\Summary.cshtml" />
     <Content Include="Views\Orders\confirmSummary.cshtml" />
+    <Content Include="Views\Manage\checkUserOrder.cshtml" />
+    <Content Include="Views\Manage\TrashView.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Migrations\202212012232575_init.resx">
@@ -530,6 +542,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202301021921319_shippingMethodInOrdersAdded.resx">
       <DependentUpon>202301021921319_shippingMethodInOrdersAdded.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202301212007100_userIDtoString.resx">
+      <DependentUpon>202301212007100_userIDtoString.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

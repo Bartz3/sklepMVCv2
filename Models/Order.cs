@@ -17,7 +17,7 @@ namespace sklepMVCv2.Models
         [MaxLength(30)]
         [Display(Name = "Status zamówienia")]
         public string Status { get; set; }
-        public int UserID { get; set; } // <--- TU BYŁ INT!!!
+        public string UserID { get; set; } // <--- TU BYŁ INT!!!
         [Required]
         [Display(Name = "Cena całkowita")]
         public decimal TotalPrice { get; set; }

@@ -43,9 +43,9 @@ namespace sklepMVCv2.Controllers
                     PaymentMethod = form["paymentMethod"],
                     ShippingMethod = form["shippingMethod"],
                     User = getUser(),
-                    UserID=1337,
-                    
-            };
+                    UserID= User.Identity.GetUserId()
+
+        };
 
                 var orderProducts = new List<OrderProduct>();
                 orderProducts = GetOrderProducts(order);
@@ -117,50 +117,6 @@ namespace sklepMVCv2.Controllers
         { 
         
             SaveOrderToDB();
-
-            //List<OrderProduct> orderProductList = new List<OrderProduct>();
-            //OrderProduct orderProduct;
-
-            //int orderId;
-            //if (db.Order != null)
-            //{
-            //    orderId = db.Order.Select(o => o.OrderID).Max() + 1;
-            //}
-            //else
-            //{
-            //    orderId = 0;
-            //}
-            //// Tabela OrderProduct -> OrderProductID - PK, 1.Amount - int, 2.ProductID - id produktu,
-            //// 3.OrderID - id zamówienia, 4.Order - zamówienie, Product- produkt
-            //decimal totalPrice = 0;
-
-            //foreach (var product in userCart)
-            //{
-            //    orderProduct = new OrderProduct();
-            //    orderProduct.Amount = 1;
-            //    orderProduct.ProductID = product.ProductID;
-            //    orderProduct.Product = product;
-            //    //orderproduct.Order=??
-            //    orderProduct.OrderID = orderId;
-
-            //    totalPrice += product.Price * orderProduct.Amount; // Cena koszyka
-            //    //db.OrderProduct.Add(orderProduct);
-            //}
-
-            ////db.SaveChanges();
-
-            //// Order -> Date, Status, UserID, TotalPrice, PaymentMethod,ShippingMethod, List<OrderProduct> ???, User
-            //Order order = new Order();
-
-            //order.Date = DateTime.Now;
-            //order.TotalPrice = totalPrice;
-            //order.Status = "Przyjęte";
-            //order.Status = OrderStatus.Nowe.ToString();
-            ////order.OrderProduct =;
-            ////order.OrderID =;
-            //order.PaymentMethod = form["paymentMethod"];
-            //order.ShippingMethod = form["shippingMethod"];
-
             var product = db.Product.Include(p => p.Vat);
 
             //order.User = getUser();

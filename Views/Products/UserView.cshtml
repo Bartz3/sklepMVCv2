@@ -42,3 +42,18 @@
         </div>
     }
 </div>
+<form asp-action="UserView" method="get">
+    <div class="form-actions no-color">
+        <p>
+            Wyszukaj produkt po kategorii:
+            <select name="categoryId">
+                <option value="">Wszystkie</option>
+                @foreach (var category in ViewBag.Categories)
+                {
+                    <option value="@category.CategoryID">@category.CategoryName</option>
+                }
+            </select>
+            <input type="submit" value="Szukaj" class="btn btn-default" />
+        </p>
+    </div>
+</form>

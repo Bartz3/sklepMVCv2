@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
@@ -21,6 +23,30 @@ namespace sklepMVCv2.Controllers
         public ManageController()
         {
             
+        }
+
+        public ApplicationUser getUser()
+        {
+            ApplicationUser user;
+            var userId = User.Identity.GetUserId(); // Logged user ID
+            user = db.Users.Find(userId);
+
+            var address = user.Street;
+            return user;
+        }
+
+        public ActionResult checkUserOrder()
+        {
+            string userId = User.Identity.GetUserId();
+
+            List<Order> orders = db.Order
+                .Where(o => o.UserID ==  userId)
+            .Include(o => o.OrderProduct)
+            .ToList();
+
+            //List<OrderProduct> orderProducts= db.OrderProduct.Where(op=>op.OrderID==)
+            //orders.Count();
+            return View(orders);
         }
 
         public ManageController(ApplicationUserManager userManager, ApplicationSignInManager signInManager)
@@ -77,6 +103,11 @@ namespace sklepMVCv2.Controllers
                 BrowserRemembered = await AuthenticationManager.TwoFactorBrowserRememberedAsync(userId),
                 //AddressID = UserManager.Users.Select(u=>u.Address).Where(u => u.AddressID ==);
             };
+
+            ApplicationUser user=getUser();
+            ViewBag.Name = user.Name;
+            ViewBag.Surname = user.Surname;
+
             return View(model);
         }
 

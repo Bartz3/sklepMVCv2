@@ -13,7 +13,7 @@ namespace sklepMVCv2.Models
         [MaxLength(1000)]
         [Display(Name = "Treść zgłoszenia")]
         public string Text { get; set; }
-        public int UserID { get; set; }
+        public string UserID { get; set; }
 
         public virtual ApplicationUser User { get; set; }
     }

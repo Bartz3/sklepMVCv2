@@ -9,34 +9,37 @@
     @Scripts.Render("~/bundles/modernizr")
 </head>
 <body>
+
     <div class="navbar navbar-inverse navbar-fixed-top">
-            <div class="container">
-                <div class="navbar-header">
-                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                    @Html.ActionLink("Sklep MVC", "UserView", "Products", new { area = "" }, new { @class = "navbar-brand" })
-                </div>
+        <a class="navbar-brand" href="#">
+            <img src="~/Static_files/store.png" width="38" height="38" alt="Icon">
+        </a>
+                @Html.ActionLink("Sklep MVC", "UserView", "Products", new { area = "" }, new { @class = "navbar-brand" })
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+            </div>
 
-                <div class="navbar-collapse collapse">
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
 
-                    <ul class="nav navbar-nav">
-
-                        <li>@Html.ActionLink("Produkty", "Index", "Products")</li>
-                        <li>@Html.ActionLink("Tabela laczaca", "Index", "CategoryProducts")</li>
-                        <li>@Html.ActionLink("Kategorie", "Index", "Categories")</li>
-                        <li>@Html.ActionLink("Produkty - userView", "UserView", "Products")</li>
-                    </ul>
-                    @Html.Partial("_LoginPartial")
-                <ul class="nav navbar-nav navbar-right">
-                    
-                    <li > @Html.ActionLink("Koszyk", "showCart", "Products")</i></li>
+                    <li>@Html.ActionLink("Produkty", "Index", "Products")</li>
+                    <li>@Html.ActionLink("Tabela laczaca", "Index", "CategoryProducts")</li>
+                    <li>@Html.ActionLink("Kategorie", "Index", "Categories")</li>
+                    <li>@Html.ActionLink("Produkty - userView", "UserView", "Products")</li>
                 </ul>
-                </div>
+                @Html.Partial("_LoginPartial")
+                <ul class="nav navbar-nav navbar-right">
+
+                    <li> @Html.ActionLink("Koszyk", "showCart", "Products")</i></li>
+                </ul>
             </div>
         </div>
+    </div>
     <div class="container body-content">
         @RenderBody()
         <hr />
@@ -52,3 +55,8 @@
     @RenderSection("scripts", required: false)
 </body>
 </html>
+<style>
+    .navbar-brand img {
+        margin-left: 20px;
+    }
+</style>

@@ -32,6 +32,9 @@ namespace sklepMVCv2.Controllers
             var product = db.Product.Include(p => p.Vat);
             //var categories = (from c in db.Category select c).ToList();
             ViewData["CurrentFilter"] = searchString;
+
+            ViewBag.Categories = db.Category.ToList();
+
             if (!string.IsNullOrEmpty(searchString))
             {
                 product = product.Where(s => s.Name.Contains(searchString));
