@@ -10,6 +10,7 @@ using sklepMVCv2.Models;
 
 namespace sklepMVCv2.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class CategoryProductsController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();

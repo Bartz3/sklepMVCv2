@@ -71,6 +71,11 @@ namespace sklepMVCv2.Models
         public virtual DbSet<Vat> Vat { get; set; }
         public virtual DbSet<OrderProduct> OrderProduct { get; set; }
         public virtual DbSet<VisitCount> VisitCount { get; set; }
+
+        //public System.Data.Entity.DbSet<sklepMVCv2.Models.ApplicationUser> ApplicationUsers { get; set; }
+
+        //public System.Data.Entity.DbSet<sklepMVCv2.Models.ApplicationUser> ApplicationUsers { get; set; }
+
     }
 
     //Klasa dodana
