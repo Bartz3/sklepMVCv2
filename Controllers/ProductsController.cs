@@ -13,6 +13,7 @@ using System.Web.Mvc;
 using Newtonsoft.Json;
 using System.Web.UI.WebControls.WebParts;
 using sklepMVCv2.Models;
+using PagedList;
 
 namespace sklepMVCv2.Controllers
 {
@@ -27,23 +28,32 @@ namespace sklepMVCv2.Controllers
 
             return View(product.ToList());
         }
-        public ActionResult UserView(string searchString)
+        public ActionResult UserView(string searchString,int page=1)
         {
             var product = db.Product.Include(p => p.Vat);
-            //var categories = (from c in db.Category select c).ToList();
-            ViewData["CurrentFilter"] = searchString;
 
-            ViewBag.Categories = db.Category.ToList();
+            IPagedList<Product> pagedListOfProducts;
 
             if (!string.IsNullOrEmpty(searchString))
             {
+                pagedListOfProducts = null;
                 product = product.Where(s => s.Name.Contains(searchString));
+                pagedListOfProducts = product.ToList().ToPagedList(page, 9);
+                return View(pagedListOfProducts);
             }
             else
             {
                 //product = null;
             }
-            return View(product.ToList());
+
+            pagedListOfProducts = product.ToList().ToPagedList(page, 9);
+            //var categories = (from c in db.Category select c).ToList();
+            ViewData["CurrentFilter"] = searchString;
+
+            ViewBag.Categories = db.Category.ToList();
+
+
+            return View(pagedListOfProducts);
         }
 
         //Dodawanie do koszyka w ciasteczku

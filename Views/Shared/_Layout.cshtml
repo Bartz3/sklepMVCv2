@@ -8,13 +8,13 @@
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
 </head>
-<body>
+<body style="background-image: url('@Url.Content("~/Static_files/background3.jpg")');">
 
-    <div class="navbar navbar-inverse navbar-fixed-top">
+    <div style="background-color:#2542b5;color:white" class="navbar navbar-inverse navbar-fixed-top">
         <a class="navbar-brand" href="#">
             <img src="~/Static_files/store.png" width="38" height="38" alt="Icon">
         </a>
-                @Html.ActionLink("Sklep MVC", "UserView", "Products", new { area = "" }, new { @class = "navbar-brand" })
+        @Html.ActionLink("Sklep MVC", "UserView", "Products", new { area = "" }, new { @class = "navbar-brand", style = "color:white" })
         <div class="container">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -26,11 +26,17 @@
 
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
+                    <li>@Html.ActionLink("Nasze produkty", "UserView", "Products")</li>
 
-                    <li>@Html.ActionLink("Produkty", "Index", "Products")</li>
-                    <li>@Html.ActionLink("Tabela laczaca", "Index", "CategoryProducts")</li>
-                    <li>@Html.ActionLink("Kategorie", "Index", "Categories")</li>
-                    <li>@Html.ActionLink("Produkty - userView", "UserView", "Products")</li>
+
+                    @if (User.IsInRole("Admin"))
+                    {
+                        <li>@Html.ActionLink("Panel admina", "AdminPanel", "Manage")</li>
+                    }
+
+                    @*<li>@Html.ActionLink("Produkty", "Index", "Products",null, new {@style = "color:#FFFFFF;" })</li>
+                        <li>@Html.ActionLink("Tabela laczaca", "Index", "CategoryProducts")</li>
+                        <li>@Html.ActionLink("Kategorie", "Index", "Categories")</li>*@
                 </ul>
                 @Html.Partial("_LoginPartial")
                 <ul class="nav navbar-nav navbar-right">
@@ -58,5 +64,8 @@
 <style>
     .navbar-brand img {
         margin-left: 20px;
+    }
+    .white-link {
+        color: white;
     }
 </style>

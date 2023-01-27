@@ -25,6 +25,11 @@ namespace sklepMVCv2.Controllers
             
         }
 
+        public ActionResult AdminPanel()
+        {
+
+            return View();
+        }
         public ApplicationUser getUser()
         {
             ApplicationUser user;

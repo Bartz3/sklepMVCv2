@@ -1,12 +1,33 @@
-﻿@model IEnumerable<sklepMVCv2.Models.Product>
+﻿@using PagedList.Mvc
+@*@model IEnumerable<sklepMVCv2.Models.Product*@
+@model PagedList.IPagedList<sklepMVCv2.Models.Product>
 
 @{
     ViewBag.Title = "UserView";
 }
 
+
 <h2>Produkty</h2>
 
 @Styles.Render("~/Content/userView.css")
+
+
+<form asp-action="UserView" method="get">
+    <aside class="form-actions no-color">
+        <p>
+            Wyszukaj produkt po kategorii:
+            <select name="categoryId">
+                <option value="">Wszystkie</option>
+                @foreach (var category in ViewBag.Categories)
+                {
+                    <option value="@category.CategoryID">@category.CategoryName</option>
+                }
+            </select>
+            <input type="submit" value="Szukaj" class="btn btn-default" />
+        </p>
+    </aside>
+</form>
+
 
 <form asp-action="UserView" method="get">
     <div class="form-actions no-color">
@@ -19,6 +40,8 @@
     </div>
 </form>
 <br />
+
+@Html.PagedListPager(Model, page => Url.Action("UserView", new { page }))
 <div class="product-list">
     @foreach (var item in Model)
     {
@@ -35,25 +58,12 @@
             <p>@item.Description</p>
             <div class="price">@item.Price zł</div>
 
-            <button class="btn btn-dark" onclick="location.href='@Url.Action("AddToCart",new { id = item.ProductID })';return false;">Dodaj do koszyka
+            <button class="btn btn-dark" onclick="location.href='@Url.Action("AddToCart",new { id = item.ProductID })';return false;">
+                Dodaj do koszyka
                 <i class="bi bi-cart"></i>
             </button>
 
         </div>
     }
 </div>
-<form asp-action="UserView" method="get">
-    <div class="form-actions no-color">
-        <p>
-            Wyszukaj produkt po kategorii:
-            <select name="categoryId">
-                <option value="">Wszystkie</option>
-                @foreach (var category in ViewBag.Categories)
-                {
-                    <option value="@category.CategoryID">@category.CategoryName</option>
-                }
-            </select>
-            <input type="submit" value="Szukaj" class="btn btn-default" />
-        </p>
-    </div>
-</form>
+@Html.PagedListPager(Model, page => Url.Action("UserView", new { page }))

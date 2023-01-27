@@ -3,16 +3,17 @@
     ViewBag.Title = "Profil użytkownika";
 }
 
-<h2>@ViewBag.Title</h2>
-@Styles.Render("~/Content/manageIndex.css")
+
+
 
 @ViewBag.xD
 
 <div class="user-profile">
+    <h2 class="title-class">@ViewBag.Title</h2>
     <div class="user-info">
         <img src="~/Static_files/user.png" class="profile-picture">
-        <h1>@ViewBag.Name @ViewBag.Surname</h1>
-        <p>@User.Identity.Name</p>
+        <h1 class="nickClass">@ViewBag.Name @ViewBag.Surname</h1>
+        <p class="emailClass">@User.Identity.Name</p>
     </div>
     <div class="user-actions">
         <a href="ChangePassword" class="btn btn-primary">Zmień hasło</a>
@@ -20,6 +21,4 @@
     </div>
 </div>
 
-<style>
-</style>
-
+@Styles.Render("~/Content/manageIndex2.css")
