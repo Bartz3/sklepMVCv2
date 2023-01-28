@@ -1,82 +1,84 @@
-﻿@{
-    ViewBag.Title = "checkUserOrder";
+﻿@model IEnumerable<sklepMVCv2.Models.Order>
+
+@{
+	ViewBag.Title = "checkUserOrder";
 }
 
 <h2>Moje zamówienia</h2>
 @Styles.Render("~/Content/checkUserOrder.css")
 <style>
-    table {
-        width: 100%;
-        border-collapse: collapse;
-    }
+	table {
+		width: 100%;
+		border-collapse: collapse;
+	}
 
-    th, td {
-        border: 1px solid #ddd;
-        padding: 8px;
-        text-align: left;
-    }
+	th, td {
+		border: 1px solid #ddd;
+		padding: 8px;
+		text-align: left;
+	}
 
-    th {
-        background-color: #f2f2f2;
-    }
+	th {
+		background-color: #f2f2f2;
+	}
 
-    .order-date {
-        text-align: center;
-    }
+	.order-date {
+		text-align: center;
+	}
 
-    .product-name {
-        text-align: left;
-    }
+	.product-name {
+		text-align: left;
+	}
 </style>
 
 <table>
-    <thead>
-        <tr>
-            <th>Numer zamówienia</th>
-            <th>Data zamówienia</th>
-            <th>Status</th>
-            <th>Cena</th>
-            <th>Metoda płatności</th>
-            <th>Metoda wysyłki</th>
-        </tr>
-    </thead>
-    <tbody>
-        @{int i = 1; }
-        @foreach (var order in Model)
-        {
-            <tr>
-                <td >@i</td>
-                <td class="order-date">@order.Date</td>
-                <td>@order.Status</td>
-                <td>@order.TotalPrice</td>
-                <td>@order.PaymentMethod</td>
-                <td>@order.ShippingMethod</td>
-            </tr>
+	<thead>
+		<tr>
+			<th>Numer zamówienia</th>
+			<th>Data zamówienia</th>
+			<th>Status</th>
+			<th>Cena</th>
+			<th>Metoda płatności</th>
+			<th>Metoda wysyłki</th>
+		</tr>
+	</thead>
+	<tbody>
+		@{int i = 1; }
+		@foreach (var order in Model)
+		{
+			<tr>
+				<td>@i</td>
+				<td class="order-date">@order.Date</td>
+				<td>@order.Status</td>
+				<td>@order.TotalPrice</td>
+				<td>@order.PaymentMethod</td>
+				<td>@order.ShippingMethod</td>
+			</tr>
 
-            <tr>
-                <td colspan="4">
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Nazwa produktu</th>
-                                <th>Cena</th>
-                                <th>Ilość</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach (var product in order.OrderProduct)
-                            {
-                                <tr>
-                                    <td class="product-name">@product.</td>
-                                    <td>2</td>
-                                    <td>3</td>
-                                </tr>
-                            }
-                        </tbody>
-                    </table>
-                </td>
-            </tr>
-            { i += 1; }
-        }
-    </tbody>
+			<tr>
+				<td colspan="4">
+					<table>
+						<thead>
+							<tr>
+								<th>Nazwa produktu</th>
+								<th>Cena</th>
+								<th>Ilość</th>
+							</tr>
+						</thead>
+						<tbody>
+							@foreach (var product in order.OrderProduct)
+							{
+								<tr>
+									<td class="product-name">@product.Product.Name</td>
+									<td>@product.Product.Price</td>
+									<td>@product.Amount</td>
+								</tr>
+							}
+						</tbody>
+					</table>
+				</td>
+			</tr>
+			{ i += 1; }
+		}
+	</tbody>
 </table>

@@ -92,6 +92,14 @@
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Product.ProductID }) |
-    @Html.ActionLink("Back to List", "Index")
+	@{ if ((string)Session["PreviousView"] == "UserView")
+		{
+
+			@Html.ActionLink("Back to List", "UserView")}
+		else if ((string)Session["PreviousView"] == "AdminView")
+		{
+			@Html.ActionLink("Edit", "Edit", new { id = Model.Product.ProductID })
+			@Html.Raw(" | ")
+			@Html.ActionLink("Back to List", "Index")}
+	}
 </p>

@@ -25,12 +25,13 @@ namespace sklepMVCv2.Controllers
         public ActionResult Index()
         {
             var product = db.Product.Include(p => p.Vat);
-
-            return View(product.ToList());
+			HttpContext.Session["PreviousView"] = "AdminView";
+			return View(product.ToList());
         }
         public ActionResult UserView(string searchString,int page=1)
         {
-            var products = db.Product.Include(p => p.Vat);
+			HttpContext.Session["PreviousView"] = "UserView";
+			var products = db.Product.Include(p => p.Vat);
             ViewBag.Categories = db.Category.ToList();
 
             IPagedList<Product> pagedListOfProducts;
