@@ -4,8 +4,10 @@ using System.Data;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
+using System.Net.Mail;
 using System.Web;
 using System.Web.Mvc;
+using Microsoft.AspNet.Identity;
 using sklepMVCv2.Models;
 
 namespace sklepMVCv2.Controllers
@@ -51,10 +53,30 @@ namespace sklepMVCv2.Controllers
         {
             if (ModelState.IsValid)
             {
+                complaint.UserID = User.Identity.GetUserId();
                 db.Complaint.Add(complaint);
                 db.SaveChanges();
-                return RedirectToAction("Index");
-            }
+
+            using(MailMessage mail = new MailMessage())
+                {
+                    mail.From = new MailAddress("kontakt.sklepmvc@gmail.com");
+                    mail.To.Add("kontakt.sklepmvc@gmail.com");
+                    mail.Subject = "Zgłoszenie ze sklepu";
+                    mail.Body ="Otrzymałeś zgłoszenie od użytkownika: "+ User.Identity.Name+ ". "
+                        + "Treść zgłoszenia: <br>" + complaint.Text;
+                    mail.IsBodyHtml = true;
+					using (SmtpClient smtp = new SmtpClient("smtp.gmail.com", 587))
+					{
+						smtp.Credentials = new NetworkCredential("kontakt.sklepmvc@gmail.com", "fruniobrdioagjjw");
+						smtp.EnableSsl = true;
+						smtp.Send(mail);
+
+					}
+				}
+            
+				return RedirectToAction("Index");
+				
+			}
 
             return View(complaint);
         }

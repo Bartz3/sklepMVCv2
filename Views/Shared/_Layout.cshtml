@@ -25,19 +25,22 @@
             </div>
 
             <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Nasze produkty", "UserView", "Products")</li>
+				<ul class="nav navbar-nav">
+					<li>@Html.ActionLink("Nasze produkty", "UserView", "Products")</li>
 
 
-                    @if (User.IsInRole("Admin"))
+					@if (User.IsInRole("Admin"))
+					{
+						<li>@Html.ActionLink("Panel admina", "AdminPanel", "Manage")</li>
+					}
+					@if (User.IsInRole("User")|| User.IsInRole("Moderator"))
                     {
-                        <li>@Html.ActionLink("Panel admina", "AdminPanel", "Manage")</li>
-                    }
-
-                    @*<li>@Html.ActionLink("Produkty", "Index", "Products",null, new {@style = "color:#FFFFFF;" })</li>
-        <li>@Html.ActionLink("Tabela laczaca", "Index", "CategoryProducts")</li>
-        <li>@Html.ActionLink("Kategorie", "Index", "Categories")</li>*@
-                </ul>
+						<li>@Html.ActionLink("Formularz kontaktowy", "Create", "Complaints")</li>
+					}
+					@*<li>@Html.ActionLink("Produkty", "Index", "Products",null, new {@style = "color:#FFFFFF;" })</li>
+		<li>@Html.ActionLink("Tabela laczaca", "Index", "CategoryProducts")</li>
+		<li>@Html.ActionLink("Kategorie", "Index", "Categories")</li>*@
+				</ul>
                 @Html.Partial("_LoginPartial")
                 <ul class="nav navbar-nav navbar-right">
 
