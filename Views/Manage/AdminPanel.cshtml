@@ -8,10 +8,11 @@
     <h1 class="admin-panel__header">Panel administracyjny</h1>
     <p class="admin-panel__welcome">Witaj, @User.Identity.Name</p>
     <div class="admin-panel__buttons">
-        <a href="@Url.Action("Index", "Products")" class="admin-panel__button">Dodaj produkt</a>
-        <a href="@Url.Action("Index", "Categories")" class="admin-panel__button">Dodaj kategorię</a>
+        <a href="@Url.Action("Index", "Products")" class="admin-panel__button">Produkty</a>
+        <a href="@Url.Action("Index", "Categories")" class="admin-panel__button">Kategorie </a>
         <a href="@Url.Action("Index", "CategoryProducts")" class="admin-panel__button">Przypisz kategorie do produktu</a>
-        <a href="@Url.Action("Index", "ApplicationUsers")" class="admin-panel__button">Zarządzaj użytkownikami</a>
+        <a href="@Url.Action("Index", "ApplicationUsers")" class="admin-panel__button">Użytkownicy</a>
+        <a href="@Url.Action("Index", "Orders")" class="admin-panel__button">Zamówienia</a>
     </div>
 </div>
 

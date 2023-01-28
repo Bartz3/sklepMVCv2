@@ -7,8 +7,6 @@ zawartoœci. Mo¿liwoœæ z³o¿enia zamówienia – 6 pkt. -> Zamówienie do zapisania w 
 • kategorie produktów. Kategorie tworz¹ wielopoziomowe drzewa. Ka¿dy produkt nale¿y do
 dok³adnie jednej kategorii – 2 pkt. ZROBIONE -> Produkt mo¿e nale¿eæ do wielu kategorii
 
-• szczegó³owy opis produktu. Opis taki mo¿e zawieraæ elementy HTML. Opis taki jest
-pokazywany m.in. po wybraniu produktu z listy – 1pkt. -> Dodanie opcji wyœwietlenia szczegó³ów po klikniêciu na nazwê produktu
 
 • dodawanie obrazków do produktów. Co najmniej dwa obrazki dla ka¿dego produktu:
 obrazek ma³y na listê i obrazek du¿y do opisu szczegó³owego – 2 pkt.  ZROBIONE
@@ -25,25 +23,38 @@ katalogowa). Ka¿dy plik posiada swój opis. Liczba plików nie jest ograniczona – 
 • wyszukiwanie proste na podstawie podanych s³ów kluczowych – 2 pkt. ZROBIONE
 
 • mo¿liwoœæ wyboru sposobu p³atnoœci i sposobu wysy³ki zakupionych produktów – 2 pkt. -> ZROBIONE
+
+• rejestracja klientów w sklepie. Profil u¿ytkownika z loginem, has³em i danymi potrzebnymi
+do wysy³ki. Mo¿liwoœæ zalogowania siê na swoje konto. Zarz¹dzanie klientami przez
+administratora – 4 pkt. ZROBIONE
+
+• zapisywanie danych zamówienia wraz z poszczególnymi pozycjami w bazie. Ka¿de
+zamówienie mo¿e byæ w jednym ze stanów: nowe, w trakcie realizacji, zrealizowane,
+anulowane. Mo¿liwoœæ zmiany stanu zamówienia przez administratora – 2 pkt. -> ZROBIONE
+
+28pkt
 ------------------------------------------------------------------------------------------------------------------------------------------
 • wpisywanie stawek podatku VAT na ka¿dy produkt. Stawka jest wybierana z listy prawnie
 obowi¹zuj¹cych stawek. Odró¿nienie stawki zerowej od zwolnienia. Wyœwietlanie cen netto
 je¿eli u¿ytkownik ustawi tak¹ opcjê w profilu – 2pkt. -> Stawki VAT bez mo¿liwoœci zobaczenia cen netto
 
-• rejestracja klientów w sklepie. Profil u¿ytkownika z loginem, has³em i danymi potrzebnymi
-do wysy³ki. Mo¿liwoœæ zalogowania siê na swoje konto. Zarz¹dzanie klientami przez
-administratora – 4 pkt. -> Brak zarz¹dzania klientami
+• szczegó³owy opis produktu. Opis taki mo¿e zawieraæ elementy HTML. Opis taki jest
+pokazywany m.in. po wybraniu produktu z listy – 1pkt. -> Dodanie opcji wyœwietlenia szczegó³ów po klikniêciu na nazwê produktu
 
+• bezpieczna procedura przypominania i zmiany has³a – 2 pkt. -> Brak przypominania
 
-• zapisywanie danych zamówienia wraz z poszczególnymi pozycjami w bazie. Ka¿de
-zamówienie mo¿e byæ w jednym ze stanów: nowe, w trakcie realizacji, zrealizowane,
-anulowane. Mo¿liwoœæ zmiany stanu zamówienia przez administratora – 2 pkt. -> Brak zmiany statusu przez admina
+• historia zamówieñ u¿ytkownika w profilu. Podgl¹d stanu niezrealizowanych zamówieñ.
+Mo¿liwoœæ ponowienia zamówienia (produkty z zaznaczonego zamówienia s¹ dodawane dokoszyka) – 2 pkt. -> Historia bez niezrealizowanych
+
+• stronicowanie list produktów. Ustawienie liczby produktów na stronie w profilu
+u¿ytkownika – 2 pkt.
+
+• formularz kontaktowy z mo¿liwoœci¹ zadania pytania dotycz¹cego danego produktu. Pytanie
+wysy³ane jest na e-mail eksperta zwi¹zanego z danym produktem – 2 pkt.
 
 ------------------------------------------------------------------------------------------------------------------------------------------
 Do zrobienia?
 • generowanie cennika produktów w formacie PDF dla wybranej kategorii – 4 pkt.
-
-• bezpieczna procedura przypominania i zmiany has³a – 2 pkt.
 
 • stany magazynowe produktów. Automatyczna aktualizacja stanów przy realizacji
 zamówienia (zmiany stanu na zrealizowane) – 2 pkt.
@@ -51,13 +62,7 @@ zamówienia (zmiany stanu na zrealizowane) – 2 pkt.
 • automatyczne wysy³anie zestawienia zamówienia na e-mail klienta tu¿ po z³o¿eniu
 zamówienia – 2 pkt.
 
-• historia zamówieñ u¿ytkownika w profilu. Podgl¹d stanu niezrealizowanych zamówieñ.
-Mo¿liwoœæ ponowienia zamówienia (produkty z zaznaczonego zamówienia s¹ dodawane dokoszyka) – 2 pkt.
-
 • automatyczne wysy³anie informacji o zmianie stanu zamówienia do klienta – 2 pkt.
-
-• stronicowanie list produktów. Ustawienie liczby produktów na stronie w profilu
-u¿ytkownika – 2 pkt.
 
 • formularz kontaktowy z mo¿liwoœci¹ zadania pytania dotycz¹cego sklepu. Pytania wysy³ane
 s¹ na adres e-mail ustawiany w administracji – 2 pkt.
@@ -95,9 +100,6 @@ nazwie, symbolu b¹dŸ opisach, kategoria, producent, przedzia³ cenowy, itp. – 4 p
 • operatory typu and, or i not przy wyszukiwaniu – 2 pkt.
 
 • lista 10 najczêœciej kupowanych produktów – 2 pkt.
-
-• formularz kontaktowy z mo¿liwoœci¹ zadania pytania dotycz¹cego danego produktu. Pytanie
-wysy³ane jest na e-mail eksperta zwi¹zanego z danym produktem – 2 pkt.
 
 • wybór skórek dla interfejsu u¿ytkownika – 2 pkt. za dwie istotnie ró¿ne skórki i 1 pkt. za
 trzeci¹.

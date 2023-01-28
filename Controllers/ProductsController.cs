@@ -30,34 +30,36 @@ namespace sklepMVCv2.Controllers
         }
         public ActionResult UserView(string searchString,int page=1)
         {
-            var product = db.Product.Include(p => p.Vat);
+            var products = db.Product.Include(p => p.Vat);
+            ViewBag.Categories = db.Category.ToList();
 
             IPagedList<Product> pagedListOfProducts;
 
             if (!string.IsNullOrEmpty(searchString))
             {
                 pagedListOfProducts = null;
-                product = product.Where(s => s.Name.Contains(searchString));
-                pagedListOfProducts = product.ToList().ToPagedList(page, 9);
+                products = products.Where(s => s.Name.Contains(searchString));
+                pagedListOfProducts = products.ToList().ToPagedList(page, 9);
                 return View(pagedListOfProducts);
             }
             else
             {
+                //string category = Request.Form["categoryId"];
+                //products = products.Where(p => p.CategoryProducts.Contains(category));
                 //product = null;
             }
 
-            pagedListOfProducts = product.ToList().ToPagedList(page, 9);
+            pagedListOfProducts = products.ToList().ToPagedList(page, 9);
             //var categories = (from c in db.Category select c).ToList();
             ViewData["CurrentFilter"] = searchString;
 
-            ViewBag.Categories = db.Category.ToList();
+            
 
 
             return View(pagedListOfProducts);
         }
 
         //Dodawanie do koszyka w ciasteczku
-
         public ActionResult AddToCart(int? id)
         {
             // Retrieve the product from the database

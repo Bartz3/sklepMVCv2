@@ -15,6 +15,8 @@ namespace sklepMVCv2.Controllers
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
+
+        [Authorize(Roles = "User,Moderator,Admin")]
         public ActionResult Summary()
         {
             List<Product> userCart = TempData["userCart"] as List<Product>;
@@ -135,12 +137,14 @@ namespace sklepMVCv2.Controllers
         }
 
         // GET: Orders
+        [Authorize(Roles ="Admin")]
         public ActionResult Index()
         {
             return View(db.Order.ToList());
         }
 
         // GET: Orders/Details/5
+        [Authorize(Roles ="Admin")]
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -156,6 +160,7 @@ namespace sklepMVCv2.Controllers
         }
 
         // GET: Orders/Create
+        [Authorize(Roles = "Admin")]
         public ActionResult Create()
         {
             return View();
@@ -166,6 +171,7 @@ namespace sklepMVCv2.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin")]
         public ActionResult Create([Bind(Include = "OrderID,Date,Status,UserID,TotalPrice,PaymentMethod,ShippingMethod")] Order order)
         {
             if (ModelState.IsValid)
@@ -179,8 +185,16 @@ namespace sklepMVCv2.Controllers
         }
 
         // GET: Orders/Edit/5
+        [Authorize(Roles = "Admin")]
         public ActionResult Edit(int? id)
         {
+            //string[] status = {OrderStatus.Nowe.ToString(),OrderStatus.W_trakcie_realizacji.ToString(),
+            //    OrderStatus.Zrealizowane.ToString(),OrderStatus.Anulowane.ToString() };
+            string[] status = { "Nowe", "W_trakcie_realizacji", "Zrealizowane", "Anulowane" };
+
+            ViewBag.status = new SelectList(status);
+
+
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -198,6 +212,7 @@ namespace sklepMVCv2.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin")]
         public ActionResult Edit([Bind(Include = "OrderID,Date,Status,UserID,TotalPrice,PaymentMethod,ShippingMethod")] Order order)
         {
             if (ModelState.IsValid)
@@ -210,6 +225,7 @@ namespace sklepMVCv2.Controllers
         }
 
         // GET: Orders/Delete/5
+        [Authorize(Roles = "Admin")]
         public ActionResult Delete(int? id)
         {
             if (id == null)

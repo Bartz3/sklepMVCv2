@@ -1,13 +1,13 @@
 ﻿@model IEnumerable<sklepMVCv2.Models.Order>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Zamówienia";
 }
 
-<h2>Index</h2>
+<h2>Zamówienia</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    <button type="button" class="btn btn-primary" onclick="location.href='@Url.Action("Create","Orders")';return false;">Dodaj nowe zamówienie</button>
 </p>
 <table class="table">
     <tr>
@@ -53,9 +53,9 @@
             @Html.DisplayFor(modelItem => item.ShippingMethod)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.OrderID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.OrderID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.OrderID })
+            <button type="button" class="btn btn-dark" onclick="location.href='@Url.Action("Details", new { id = item.OrderID })';return false;">Szczegóły</button>
+            <button type="button" class="btn btn-dark" onclick="location.href='@Url.Action("Edit", new { id = item.OrderID })';return false;">Edytuj</button>
+            <button type="button" class="btn btn-dark" onclick="location.href='@Url.Action("Delete", new { id = item.OrderID })';return false;">Usuń</button>
         </td>
     </tr>
 }

@@ -12,7 +12,7 @@
 @Styles.Render("~/Content/userView.css")
 
 
-<form asp-action="UserView" method="get">
+@*<form asp-action="UserView" method="get">
     <aside class="form-actions no-color">
         <p>
             Wyszukaj produkt po kategorii:
@@ -26,7 +26,7 @@
             <input type="submit" value="Szukaj" class="btn btn-default" />
         </p>
     </aside>
-</form>
+</form>*@
 
 
 <form asp-action="UserView" method="get">
@@ -54,7 +54,8 @@
                     <img src='@imgsrc' height="150" />
                 }
             }
-            <h3>@item.Name</h3>
+            <h3><a style="color:black;" href="@Url.Action("Details", "Products", new { id = item.ProductID })">@item.Name</a></h3>
+            @*<h3>@item.Name</h3>*@
             <p>@item.Description</p>
             <div class="price">@item.Price zł</div>
 
