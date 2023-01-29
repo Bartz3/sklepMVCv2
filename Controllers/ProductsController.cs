@@ -14,6 +14,7 @@ using Newtonsoft.Json;
 using System.Web.UI.WebControls.WebParts;
 using sklepMVCv2.Models;
 using PagedList;
+using System.Web.UI;
 
 namespace sklepMVCv2.Controllers
 {
@@ -22,10 +23,15 @@ namespace sklepMVCv2.Controllers
         private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: Products
-        public ActionResult Index()
+        public ActionResult Index(string searchString)
         {
             var product = db.Product.Include(p => p.Vat);
 			HttpContext.Session["PreviousView"] = "AdminView";
+			if (!string.IsNullOrEmpty(searchString))
+			{
+				
+				product = product.Where(s => s.Name.Contains(searchString));
+			}
 			return View(product.ToList());
         }
         public ActionResult UserView(string searchString,int page=1)
