@@ -6,7 +6,9 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.UI;
 using Microsoft.AspNet.Identity;
+using PagedList;
 using sklepMVCv2.Models;
 
 namespace sklepMVCv2.Controllers
@@ -15,7 +17,9 @@ namespace sklepMVCv2.Controllers
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
-
+        //[Authorize(Roles = "User")]
+        //[Authorize(Roles = "Moderator")]
+        //[Authorize(Roles = "Admin")]
         [Authorize(Roles = "User,Moderator,Admin")]
         public ActionResult Summary()
         {
@@ -119,11 +123,12 @@ namespace sklepMVCv2.Controllers
         { 
         
             SaveOrderToDB();
-            var product = db.Product.Include(p => p.Vat);
-
+            var products = db.Product.Include(p => p.Vat);
+            IPagedList<Product> pagedListOfProducts;
             //order.User = getUser();
+            pagedListOfProducts = products.ToList().ToPagedList(1, 9);
 
-            return View("~/Views/Products/Index.cshtml", product.ToList());
+            return View("~/Views/Products/UserView.cshtml", pagedListOfProducts);
         }
 
         public ApplicationUser getUser()

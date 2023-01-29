@@ -27,6 +27,10 @@
     .product-name {
         text-align: left;
     }
+
+    .order-product-table {
+        background-color: #1ca1b4;
+    }
 </style>
 
 <table>
@@ -45,31 +49,30 @@
         @foreach (var order in Model)
         {
             <tr>
-                <td >@i</td>
+                <td>@i</td>
                 <td class="order-date">@order.Date</td>
                 <td>@order.Status</td>
                 <td>@order.TotalPrice</td>
                 <td>@order.PaymentMethod</td>
                 <td>@order.ShippingMethod</td>
             </tr>
-
             <tr>
                 <td colspan="4">
-                    <table>
-                        <thead>
+                    <table >
+                        <thead >
                             <tr>
-                                <th>Nazwa produktu</th>
-                                <th>Cena</th>
-                                <th>Ilość</th>
+                                <th class="order-product-table">Nazwa produktu</th>
+                                <th class="order-product-table">Cena</th>
+                                <th class="order-product-table">Ilość</th>
                             </tr>
                         </thead>
                         <tbody>
                             @foreach (var product in order.OrderProduct)
                             {
                                 <tr>
-                                    <td class="product-name">@product.</td>
-                                    <td>2</td>
-                                    <td>3</td>
+                                    <td class="product-name">@product.Product.Name</td>
+                                    <td class="product-name">@product.Product.Price</td>
+                                    <td class="product-name">@product.Product.Description</td>
                                 </tr>
                             }
                         </tbody>
@@ -79,4 +82,4 @@
             { i += 1; }
         }
     </tbody>
-</table>
+    </table>
