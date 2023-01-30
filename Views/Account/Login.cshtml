@@ -6,6 +6,7 @@
 
 <style>
     .log {
+        margin-top: 30px;
         border: 1px solid #ccc;
         border-radius: 8px;
         padding: 20px;
@@ -15,6 +16,9 @@
     }
 
     #loginForm {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
         padding: 10px;
     }
 
@@ -33,15 +37,15 @@
             outline: none;
         }
 
+    label,
+    input[type="submit"],
+    input[type="button"] {
+        width: 100%;
+        text-align: center;
+    }
+
     .margin {
         margin: 10px 0;
-    }
-
-    .marginpassword {
-        margin: 3px;
-    }
-
-    .checkbox {
     }
 
     .btn-default {
@@ -53,23 +57,23 @@
         cursor: pointer;
         margin-top: 10px;
     }
-
 </style>
+
 @*@Styles.Render("~/Content/Login.css")*@
 @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
 {
 
-    <div class="log " >
-        <section id="loginForm" class="padding" >
+    <div class="log ">
+        <section id="loginForm" class="padding">
 
             <h2>Logowanie</h2>
             @Html.AntiForgeryToken()
             <h4>Użyj lokalnego konta do zalogowania.</h4>
-            <hr />
+           
             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-            <div >
+            <div>
                 @Html.LabelFor(m => m.Email, new { @class = "col-md-2 control-label" })
-                <div class="margin">
+                <div class="">
                     @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
                     @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
                 </div>
@@ -84,10 +88,10 @@
             <div>
                 @*<div>
 
-                    @Html.CheckBoxFor(m => m.RememberMe)
-                    @Html.LabelFor(m => m.RememberMe)
+                        @Html.CheckBoxFor(m => m.RememberMe)
+                        @Html.LabelFor(m => m.RememberMe)
 
-                </div>*@
+                    </div>*@
                 <p>
                     @*Enable this once you have account confirmation enabled for password reset functionality*@
                     @Html.ActionLink("Zapomniałeś hasła?", "ForgotPassword")
@@ -98,7 +102,7 @@
                 <div>
                     <input type="submit" value="Zaloguj" class="btn btn-success" />
                 </div>
-                
+
 
             </div>
             <hr />
@@ -107,7 +111,7 @@
                 <input type="button" value="Zarejestruj się" onclick="location.href='@Url.Action("Register", "Account")'" class="btn btn-primary" />
                 @*@Html.ActionLink("Zarejestruj się", "Register")*@
             </p>
- 
+
         </section>
     </div>
 }

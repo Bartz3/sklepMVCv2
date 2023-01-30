@@ -35,7 +35,7 @@
 
                     </td>
                     <td>@product.Price zł</td>
-                    <td> <button class="btn btn-warning " onclick="location.href='@Url.Action("RemoveFromBasket","Products", new { id = product.ProductID })';return false;">-</button></td>
+                    <td> <button class="btn btn-warning " onclick="location.href='@Url.Action("RemoveFromBasket","Products", new { id = product.ProductID })';return false;">Usuń produkt z koszyka</button></td>
                 </tr>
                 sum += product.Price;
                
