@@ -15,6 +15,7 @@ using System.Web.UI.WebControls.WebParts;
 using sklepMVCv2.Models;
 using PagedList;
 using System.Web.UI;
+using System.Net.Mail;
 
 namespace sklepMVCv2.Controllers
 {
@@ -121,7 +122,7 @@ namespace sklepMVCv2.Controllers
         }
 
         // GET: Products/Details/5
-        public ActionResult Details(int? id)
+        public ActionResult Details(int? id, string question)
         {
             if (id == null)
             {
@@ -137,7 +138,41 @@ namespace sklepMVCv2.Controllers
             };
 
             var categoryProducts = db.CategoryProducts.Include(c => c.Category).Where(p => p.ProductID == id).Select(p => p.Category.CategoryName).ToList();
+            if (question != null)
+            {
+                if (question != "")
+                {
+                    if (User.Identity.Name != "")
+                    {
+                        using (MailMessage mail = new MailMessage())
+                        {
+                            mail.From = new MailAddress("kontakt.sklepmvc@gmail.com");
+                            mail.To.Add("kontakt.sklepmvc@gmail.com");
+                            mail.Subject = "Zapytanie dotyczące produktu: " + product.Name;
+                            mail.Body = "Otrzymałeś pytanie od użytkownika: " + User.Identity.Name + " dotyczące produktu " + product.Name + ". "
+                                + "Treść pytania: <br>" + question;
+                            mail.IsBodyHtml = true;
+                            using (SmtpClient smtp = new SmtpClient("smtp.gmail.com", 587))
+                            {
+                                smtp.Credentials = new NetworkCredential("kontakt.sklepmvc@gmail.com", "fruniobrdioagjjw");
+                                smtp.EnableSsl = true;
+                                smtp.Send(mail);
 
+                            }
+
+                        }
+                        ViewBag.alert = "Wysłano pytanie do eksperta";
+                    }
+                    else
+                    {
+                        ViewBag.alert = "Musisz być zalogowany aby zadać pytanie!!!";
+                    }
+                }
+                else
+                {
+                    ViewBag.alert = "Pytanie nie może być puste";
+                }
+            }
             ViewBag.categories = categoryProducts;
             // var query2 = db.Companies.Where(c => c.Name.ToLower() == company.Name.ToLower());
             if (product == null)

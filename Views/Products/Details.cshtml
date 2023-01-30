@@ -74,7 +74,37 @@
 			<i class="bi bi-cart"></i>
 		</button>
 	</div>
+	@using (Html.BeginForm())
+	{
+		@Html.AntiForgeryToken()
+
+		<div class="form-horizontal">
+			<hr />
+			@Html.ValidationSummary(true, "", new { @class = "text-danger" })
+			<div class="form-group">
+				Wyślij pytanie do eksperta:
+				<textarea name="question" id="question"
+						  rows="5" cols="40"
+						  data-val-required="The Description field is required."
+						  data-val-maxlength-max="5000"
+						  data-val-maxlength="The field Description must be a string or array type with a maximum length of '5000'."
+						  data-val="true"></textarea>
+
+			</div>
+
+			<div class="form-group">
+				<div class="col-md-offset-2 col-md-10">
+					<input type="submit" value="Wyślij" class="btn btn-default" />
+				</div>
+			</div>
+		</div>
+		if (ViewBag.alert != null)
+		{
+			<div class="alert alert-danger">@ViewBag.alert</div>
+		}
+	}
 </div>
+
 
 <p>
 	@{ if ((string)Session["PreviousView"] == "UserView")
