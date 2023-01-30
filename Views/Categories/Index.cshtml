@@ -22,11 +22,12 @@
         <td>
             @Html.DisplayFor(modelItem => item.CategoryName)
         </td>
-        <td>
-            <button type="button" class="btn btn-dark" onclick="location.href='@Url.Action("Details", new { id = item.CategoryID })';return false;">Szczegóły</button>
-            <button type="button" class="btn btn-dark" onclick="location.href='@Url.Action("Edit", new { id = item.CategoryID })';return false;">Edytuj</button>
-            <button type="button" class="btn btn-dark" onclick="location.href='@Url.Action("Delete", new { id = item.CategoryID })';return false;">Usuń</button>
-        </td>
+		<td>
+			<button type="button" class="btn btn-dark" onclick="location.href='@Url.Action("Details", new { id = item.CategoryID })';return false;">Szczegóły</button>
+			<button type="button" class="btn btn-dark" onclick="location.href='@Url.Action("Edit", new { id = item.CategoryID })';return false;">Edytuj</button>
+			<button type="button" class="btn btn-dark" onclick="location.href='@Url.Action("Delete", new { id = item.CategoryID })';return false;">Usuń</button>
+			<button type="button" class="btn btn-dark" onclick="location.href='@Url.Action("Generate", new { id = item.CategoryID })';return false;">Wygeneruj cennik</button>
+		</td>
     </tr>
 }
 

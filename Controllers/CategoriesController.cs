@@ -2,10 +2,15 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
+using System.Drawing.Printing;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using System.Xml.Linq;
+using iTextSharp.text;
+using iTextSharp.text.pdf;
 using sklepMVCv2.Models;
 
 namespace sklepMVCv2.Controllers
@@ -42,10 +47,39 @@ namespace sklepMVCv2.Controllers
             return View();
         }
 
-        // POST: Categories/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
+
+		public FileResult Generate(int? id)
+        {
+            using (MemoryStream memoryStream = new MemoryStream())
+            {
+                Document document = new Document(PageSize.A4, 10, 10, 10, 10);
+				PdfWriter writer = PdfWriter.GetInstance(document, memoryStream);
+				document.Open();
+				// Add content to the PDF document
+				var categoryProductIds = db.CategoryProducts
+		        .Where(cp => cp.CategoryID == id)
+		        .Select(cp => cp.ProductID)
+		        .ToList();
+
+				var data = db.Product
+			    .Where(p => categoryProductIds.Contains(p.ProductID))
+			    .ToList();
+
+				foreach (var item in data)
+				{
+					document.Add(new Paragraph(item.Name + ": " + item.Price +"PLN"));
+				}
+				document.Close();
+				byte[] bytes = memoryStream.ToArray();
+				memoryStream.Close();
+				return File(bytes, "application/pdf");
+				
+			}
+		}
+		// POST: Categories/Create
+		// To protect from overposting attacks, enable the specific properties you want to bind to, for 
+		// more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+		[HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "CategoryID,CategoryName")] Category category)
         {
