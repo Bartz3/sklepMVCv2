@@ -137,7 +137,10 @@ namespace sklepMVCv2.Controllers
                 PdfFiles = pdfFiles
             };
 
-            var categoryProducts = db.CategoryProducts.Include(c => c.Category).Where(p => p.ProductID == id).Select(p => p.Category.CategoryName).ToList();
+            var categoryProducts = db.CategoryProducts.
+                Include(c => c.Category).
+                Where(p => p.ProductID == id).
+                Select(p => p.Category.CategoryName).ToList();
             if (question != null)
             {
                 if (question != "")

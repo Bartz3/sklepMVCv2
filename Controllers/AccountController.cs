@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Globalization;
 using System.Linq;
+using System.Net.Mail;
+using System.Net;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using System.Web;
@@ -231,15 +233,38 @@ namespace sklepMVCv2.Controllers
                 // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771
                 // Send an email with this link
                 string code = await UserManager.GeneratePasswordResetTokenAsync(user.Id);
+
                 var callbackUrl = Url.Action("ResetPassword", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
-                await UserManager.SendEmailAsync(user.Id, "Reset Password", "Please reset your password by clicking <a href=\"" + callbackUrl + "\">here</a>");
+                //await UserManager.SendEmailAsync(user.Id, "Reset Password", "Zresetuj swoje hasło klikając <a href=\"" + callbackUrl + "\">TUTAJ</a>");
+                
+                string link = "Zresetuj swoje hasło klikając <a href=\"" + callbackUrl + "\">TUTAJ</a>";
+                sendMail(user.Email,link);
+
                 return RedirectToAction("ForgotPasswordConfirmation", "Account");
             }
 
             // If we got this far, something failed, redisplay form
             return View(model);
         }
+        public void sendMail(string email,string link)
+        {
 
+            using (MailMessage mail = new MailMessage())
+            {
+                mail.From = new MailAddress("kontakt.sklepmvc@gmail.com");
+                mail.To.Add(email);
+                mail.Subject = "Resetowanie hasła";
+                mail.Body = link;
+                mail.IsBodyHtml = true;
+                using (SmtpClient smtp = new SmtpClient("smtp.gmail.com", 587))
+                {
+                    smtp.Credentials = new NetworkCredential("kontakt.sklepmvc@gmail.com", "fruniobrdioagjjw");
+                    smtp.EnableSsl = true;
+                    smtp.Send(mail);
+
+                }
+            }
+        }
         //
         // GET: /Account/ForgotPasswordConfirmation
         [AllowAnonymous]

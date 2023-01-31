@@ -65,6 +65,12 @@ namespace sklepMVCv2.Controllers
 			    .Where(p => categoryProductIds.Contains(p.ProductID))
 			    .ToList();
 
+                var categoryName = db.Category.Where(c => c.CategoryID == id).
+                    Select(c => c.CategoryName).ToString();
+
+                document.AddTitle(categoryName);
+
+            
 				foreach (var item in data)
 				{
 					document.Add(new Paragraph(item.Name + ": " + item.Price +"PLN"));

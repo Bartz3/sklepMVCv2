@@ -4,6 +4,7 @@ using System.Data;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
+using System.Net.Mail;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.UI;
@@ -144,8 +145,10 @@ namespace sklepMVCv2.Controllers
         // GET: Orders
         [Authorize(Roles ="Admin")]
         public ActionResult Index()
-        {
-            return View(db.Order.ToList());
+        {   
+            var orders = db.Order.OrderByDescending(o => o.Date).ToList();
+            
+            return View(orders);
         }
 
         // GET: Orders/Details/5
@@ -211,7 +214,25 @@ namespace sklepMVCv2.Controllers
             }
             return View(order);
         }
+        public void sendMail(string email,string oldStatus,string newStatus,int orderId)
+        {
 
+            using (MailMessage mail = new MailMessage())
+            {
+                mail.From = new MailAddress("kontakt.sklepmvc@gmail.com");
+                mail.To.Add(email);
+                mail.Subject = "Zmiana statusu zamówienia";
+                mail.Body = $"Zamówienie o ID {orderId} zmieniło status z {oldStatus} na {newStatus}.";
+                mail.IsBodyHtml = true;
+                using (SmtpClient smtp = new SmtpClient("smtp.gmail.com", 587))
+                {
+                    smtp.Credentials = new NetworkCredential("kontakt.sklepmvc@gmail.com", "fruniobrdioagjjw");
+                    smtp.EnableSsl = true;
+                    smtp.Send(mail);
+
+                }
+            }
+        }
         // POST: Orders/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
@@ -220,9 +241,21 @@ namespace sklepMVCv2.Controllers
         [Authorize(Roles = "Admin")]
         public ActionResult Edit([Bind(Include = "OrderID,Date,Status,UserID,TotalPrice,PaymentMethod,ShippingMethod")] Order order)
         {
+            var originalOrder = db.Order.Find(order.OrderID);
+
+            if (originalOrder.Status != order.Status)
+            {
+                ApplicationUser applicationUser = db.Users.Find(originalOrder.UserID);
+                var email = applicationUser.Email;
+                sendMail(email, originalOrder.Status, order.Status, order.OrderID);
+            }
+
+            db.Entry(originalOrder).State = EntityState.Modified;
+            db.Entry(originalOrder).CurrentValues.SetValues(order);
+
+ 
             if (ModelState.IsValid)
             {
-                db.Entry(order).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }

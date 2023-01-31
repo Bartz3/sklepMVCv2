@@ -18,7 +18,7 @@
             @Html.DisplayNameFor(model => model.Status)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.UserID)
+            @Html.DisplayNameFor(model => model.User.Email)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.TotalPrice)
@@ -41,7 +41,7 @@
             @Html.DisplayFor(modelItem => item.Status)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.UserID)
+            @Html.DisplayFor(modelItem => item.User.Email)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.TotalPrice)
@@ -54,7 +54,7 @@
         </td>
         <td>
             <button type="button" class="btn btn-dark" onclick="location.href='@Url.Action("Details", new { id = item.OrderID })';return false;">Szczegóły</button>
-            <button type="button" class="btn btn-dark" onclick="location.href='@Url.Action("Edit", new { id = item.OrderID })';return false;">Edytuj</button>
+            <button type="button" class="btn btn-warning" onclick="location.href='@Url.Action("Edit", new { id = item.OrderID })';return false;">Edytuj</button>
             <button type="button" class="btn btn-dark" onclick="location.href='@Url.Action("Delete", new { id = item.OrderID })';return false;">Usuń</button>
         </td>
     </tr>

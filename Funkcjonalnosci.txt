@@ -1,12 +1,11 @@
 Funkcjonalnoœci:
 • wyœwietlanie listy produktów. Koszyk z mo¿liwoœci¹ dodawania produktów i edycj¹
-zawartoœci. Mo¿liwoœæ z³o¿enia zamówienia – 6 pkt. -> Zamówienie do zapisania w bazie
+zawartoœci. Mo¿liwoœæ z³o¿enia zamówienia – 6 pkt. -> ZROBIONE
 
 • zarz¹dzanie produktami w panelu administracyjnym – 2 pkt. ZROBIONE
 
 • kategorie produktów. Kategorie tworz¹ wielopoziomowe drzewa. Ka¿dy produkt nale¿y do
 dok³adnie jednej kategorii – 2 pkt. ZROBIONE -> Produkt mo¿e nale¿eæ do wielu kategorii
-
 
 • dodawanie obrazków do produktów. Co najmniej dwa obrazki dla ka¿dego produktu:
 obrazek ma³y na listê i obrazek du¿y do opisu szczegó³owego – 2 pkt.  ZROBIONE
@@ -32,40 +31,40 @@ administratora – 4 pkt. ZROBIONE
 zamówienie mo¿e byæ w jednym ze stanów: nowe, w trakcie realizacji, zrealizowane,
 anulowane. Mo¿liwoœæ zmiany stanu zamówienia przez administratora – 2 pkt. -> ZROBIONE
 
-28pkt
+• generowanie cennika produktów w formacie PDF dla wybranej kategorii – 4 pkt -> ZROBIONE
+
+• szczegó³owy opis produktu. Opis taki mo¿e zawieraæ elementy HTML. Opis taki jest
+pokazywany m.in. po wybraniu produktu z listy – 1pkt. -> ZROBIONE
+
+• formularz kontaktowy z mo¿liwoœci¹ zadania pytania dotycz¹cego sklepu. Pytania wysy³ane
+s¹ na adres e-mail ustawiany w administracji – 2 pkt. -> ZROBIONE
+
+• bezpieczna procedura przypominania i zmiany has³a – 2 pkt. -> ZROBIONE
+
+• automatyczne wysy³anie informacji o zmianie stanu zamówienia do klienta – 2 pkt. ZROBIONE
+
+39pkt
 ------------------------------------------------------------------------------------------------------------------------------------------
 • wpisywanie stawek podatku VAT na ka¿dy produkt. Stawka jest wybierana z listy prawnie
 obowi¹zuj¹cych stawek. Odró¿nienie stawki zerowej od zwolnienia. Wyœwietlanie cen netto
-je¿eli u¿ytkownik ustawi tak¹ opcjê w profilu – 2pkt. -> Stawki VAT bez mo¿liwoœci zobaczenia cen netto
-
-• szczegó³owy opis produktu. Opis taki mo¿e zawieraæ elementy HTML. Opis taki jest
-pokazywany m.in. po wybraniu produktu z listy – 1pkt. -> Dodanie opcji wyœwietlenia szczegó³ów po klikniêciu na nazwê produktu
-
-• bezpieczna procedura przypominania i zmiany has³a – 2 pkt. -> Brak przypominania
+je¿eli u¿ytkownik ustawi tak¹ opcjê w profilu – 2pkt. -> Stawki VAT bez mo¿liwoœci zobaczenia cen netto 
 
 • historia zamówieñ u¿ytkownika w profilu. Podgl¹d stanu niezrealizowanych zamówieñ.
 Mo¿liwoœæ ponowienia zamówienia (produkty z zaznaczonego zamówienia s¹ dodawane dokoszyka) – 2 pkt. -> Historia bez niezrealizowanych
 
 • stronicowanie list produktów. Ustawienie liczby produktów na stronie w profilu
-u¿ytkownika – 2 pkt.
+u¿ytkownika – 2 pkt. -> Stronnicowanie bez ustawiania
 
 • formularz kontaktowy z mo¿liwoœci¹ zadania pytania dotycz¹cego danego produktu. Pytanie
-wysy³ane jest na e-mail eksperta zwi¹zanego z danym produktem – 2 pkt.
+wysy³ane jest na e-mail eksperta zwi¹zanego z danym produktem – 2 pkt. -> Ekspertem jest jedna, bardzo zdolna osoba
+
 
 ------------------------------------------------------------------------------------------------------------------------------------------
-Do zrobienia?
-• generowanie cennika produktów w formacie PDF dla wybranej kategorii – 4 pkt.
-
 • stany magazynowe produktów. Automatyczna aktualizacja stanów przy realizacji
 zamówienia (zmiany stanu na zrealizowane) – 2 pkt.
 
 • automatyczne wysy³anie zestawienia zamówienia na e-mail klienta tu¿ po z³o¿eniu
 zamówienia – 2 pkt.
-
-• automatyczne wysy³anie informacji o zmianie stanu zamówienia do klienta – 2 pkt.
-
-• formularz kontaktowy z mo¿liwoœci¹ zadania pytania dotycz¹cego sklepu. Pytania wysy³ane
-s¹ na adres e-mail ustawiany w administracji – 2 pkt.
 ------------------------------------------------------------------------------------------------------------------------------------------
 • nowoœci i promocje. Do nowoœci automatycznie zalicza siê okreœlon¹ liczbê ostatnio
 dodanych produktów. Promocje polegaj¹ na czasowej obni¿ce ceny danego produktu.
