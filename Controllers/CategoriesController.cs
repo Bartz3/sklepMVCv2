@@ -12,6 +12,7 @@ using System.Xml.Linq;
 using iTextSharp.text;
 using iTextSharp.text.pdf;
 using sklepMVCv2.Models;
+using static iTextSharp.text.pdf.AcroFields;
 
 namespace sklepMVCv2.Controllers
 {
@@ -64,17 +65,20 @@ namespace sklepMVCv2.Controllers
 				var data = db.Product
 			    .Where(p => categoryProductIds.Contains(p.ProductID))
 			    .ToList();
+                
+                var category = db.Category.Find(id);
 
-                var categoryName = db.Category.Where(c => c.CategoryID == id).
-                    Select(c => c.CategoryName).ToString();
+                document.AddTitle(category.CategoryName);
 
-                document.AddTitle(categoryName);
-
-            
+                document.Add(new Paragraph("Cennik produktów dla kategorii: " + category.CategoryName));
 				foreach (var item in data)
 				{
 					document.Add(new Paragraph(item.Name + ": " + item.Price +"PLN"));
 				}
+                if (data.Count == 0)
+                {
+                    document.Add(new Paragraph("Brak produktów w wybranej kategorii!"));
+                }
 				document.Close();
 				byte[] bytes = memoryStream.ToArray();
 				memoryStream.Close();
