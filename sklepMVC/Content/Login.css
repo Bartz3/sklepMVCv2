@@ -1,0 +1,48 @@
+﻿.log {
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+#loginForm {
+    padding: 10px;
+}
+
+.form-control {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    transition: border-color 0.3s ease-in-out;
+}
+
+    .form-control:focus {
+        border-color: #3498db;
+        outline: none;
+    }
+
+.margin {
+    margin: 10px 0;
+}
+
+.marginpassword {
+    margin: 3px;
+}
+
+.checkbox {
+}
+
+.btn-default {
+    background-color: #3498db;
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-top: 10px;
+}

@@ -1,0 +1,103 @@
+﻿@model IEnumerable<sklepMVCv2.Models.Product>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Produkty</h2>
+
+<p>
+    <button type="button" class="btn btn-primary" onclick="location.href='@Url.Action("Create","Products")';return false;">Dodaj nowy produkt</button>
+</p>
+
+<form asp-action="Index" method="get">
+    <div class="form-actions no-color">
+        <p>
+            Wyszukaj produkt <input type="text" name="searchString" value="@ViewData["CurrentFilter"]" />
+            <input type="submit" value="Szukaj" class="btn btn-default" />
+            <input type="button" value="Wróć do listy produktów" class="btn btn-default" onclick="location.href='/Products/Index';" />
+
+        </p>
+    </div>
+</form>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.ProductID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Description)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Price)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Vat.VatRate)
+        </th>
+
+        <th>
+            @Html.DisplayNameFor(model => model.Image)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Quantity)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CategoryProducts)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ProductID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Price)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Vat.VatRate)
+            </td>
+            <td>
+                @{
+                    if (item.Image != null)
+                    {
+                        var base64 = Convert.ToBase64String(item.Image);
+                        var imgsrc = string.Format("data:image/gif;base64,{0}", base64);
+                        <img src='@imgsrc' height="100" />
+                    }
+
+                }
+
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Quantity)
+            </td>
+
+            <td>
+                @foreach (var Category in item.CategoryProducts) 
+                {
+                    @Html.DisplayFor(modelItem => Category.Category.CategoryName)<br />
+                }
+            </td>
+            
+            <td>
+                <button type="button" class="btn btn-warning" onclick="location.href='@Url.Action("Details", new { id = item.ProductID })';return false;">Szczegóły</button>
+                <button type="button" class="btn btn-dark" onclick="location.href='@Url.Action("Edit", new { id = item.ProductID })';return false;">Edytuj</button>
+                <button type="button" class="btn btn-danger" onclick="location.href='@Url.Action("Delete", new { id = item.ProductID })';return false;">Usuń</button>
+            </td>
+        </tr>
+    }
+
+</table>

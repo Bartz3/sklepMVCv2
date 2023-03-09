@@ -1,0 +1,41 @@
+﻿@model IEnumerable<sklepMVCv2.Models.CategoryProducts>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2> Przypisz kategorie do produktu</h2>
+
+<p>
+    <button type="button" class="btn btn-primary" onclick="location.href='@Url.Action("Create","CategoryProducts")';return false;">Dodaj kategorię do produktu</button>
+</p>
+
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Category.CategoryName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Product.Name)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Category.CategoryName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Product.Name)
+        </td>
+        <td>
+            <button type="button" class="btn btn-dark" onclick="location.href='@Url.Action("Details", new { id = item.CategoryProductsID })';return false;">Szczegóły</button>
+            <button type="button" class="btn btn-dark" onclick="location.href='@Url.Action("Edit", new { id = item.CategoryProductsID })';return false;">Edytuj</button>
+            <button type="button" class="btn btn-dark" onclick="location.href='@Url.Action("Delete", new { id = item.CategoryProductsID })';return false;">Usuń</button>
+        </td>
+    </tr>
+}
+
+</table>

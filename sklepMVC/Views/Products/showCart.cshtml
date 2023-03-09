@@ -1,0 +1,64 @@
+﻿
+@{
+    ViewBag.Title = "Koszyk";
+}
+
+@ViewBag.test
+
+<h2>Koszyk</h2>
+
+
+@Styles.Render("~/Content/cartView.css")
+@if (Model != null) // If cart is not empty
+{
+    <table>
+        <tr>
+            <th>Nazwa</th>
+            <th>Opis</th>
+            <th>Zdjęcie</th>
+            <th>Cena</th>
+        </tr>
+        @{
+            decimal sum = 0;
+            foreach (var product in Model)
+            {
+                <tr>
+                    <td>@product.Name</td>
+                    <td>@product.Description</td>
+                    <td>
+                        @if (product.Image != null)
+                        {
+                            var base64 = Convert.ToBase64String(product.Image);
+                            var imgsrc = string.Format("data:image/gif;base64,{0}", base64);
+                            <img src='@imgsrc' height="50" />
+                        }
+
+                    </td>
+                    <td>@product.Price zł</td>
+                    <td> <button class="btn btn-warning " onclick="location.href='@Url.Action("RemoveFromBasket","Products", new { id = product.ProductID })';return false;">Usuń produkt z koszyka</button></td>
+                </tr>
+                sum += product.Price;
+               
+            }
+            <h4>Suma zakupów: @sum zł</h4>
+
+
+
+        }
+    </table>
+    <br />
+
+    <button class="btn btn-info " onclick="location.href='@Url.Action("UserView","Products")';return false;">Wróć do listy produktów </button>
+    <button class="btn btn-info " onclick="location.href='@Url.Action("Summary","Orders",new { products = Model })';return false;">Przejdź do podsumowania </button>
+
+}
+else
+{
+    <h3>Koszyk jest pusty</h3>
+    <button class="btn btn-info " onclick="location.href='@Url.Action("UserView","Products")';return false;">Wróć do listy produktów </button>
+}
+
+
+
+
+

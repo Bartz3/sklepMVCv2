@@ -1,0 +1,68 @@
+﻿
+@{
+    ViewBag.Title = "Panel administracyjny";
+}
+
+
+<div class="admin-panel">
+    <h1 class="admin-panel__header">Panel administracyjny</h1>
+    <p class="admin-panel__welcome">Witaj, @User.Identity.Name</p>
+    <div class="admin-panel__buttons">
+        <a href="@Url.Action("Index", "Products")" class="admin-panel__button">Produkty</a>
+        <a href="@Url.Action("Index", "Categories")" class="admin-panel__button">Kategorie </a>
+        <a href="@Url.Action("Index", "CategoryProducts")" class="admin-panel__button">Przypisz kategorie do produktu</a>
+        <a href="@Url.Action("Index", "ApplicationUsers")" class="admin-panel__button">Użytkownicy</a>
+        <a href="@Url.Action("Index", "Orders")" class="admin-panel__button">Zamówienia</a>
+    </div>
+</div>
+
+<style>
+    /* Ogólny styl dla całego widoku */
+    /* Ogólny styl dla całego widoku */
+    .admin-panel {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+    }
+
+    /* Nagłówek */
+    .admin-panel__header {
+        text-align: center;
+        margin-top: 20px;
+        margin-bottom: 20px;
+        font-size: 42px;
+    }
+
+    /* Wiadomość powitalna */
+    .admin-panel__welcome {
+        text-align: center;
+        font-size: 1.5em;
+        margin-bottom: 20px;
+    }
+
+    /* Przyciski */
+    .admin-panel__buttons {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .admin-panel__button {
+        width: 150px;
+        font-size:15px;
+        padding: 10px;
+        text-align: center;
+        margin: 10px;
+        text-decoration: none;
+        color: white;
+        background-color: #4CAF50;
+        border-radius: 5px;
+        transition: background-color 0.3s ease;
+    }
+
+    /* Efekt hover na przyciskach */
+        .admin-panel__button:hover {
+            background-color: #3e8e41;
+        }
+
+</style>

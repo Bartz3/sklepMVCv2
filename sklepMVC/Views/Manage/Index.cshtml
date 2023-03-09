@@ -1,0 +1,24 @@
+﻿@model sklepMVCv2.Models.IndexViewModel
+@{
+    ViewBag.Title = "Profil użytkownika";
+}
+
+
+
+
+@ViewBag.xD
+
+<div class="user-profile">
+    <h2 class="title-class">@ViewBag.Title</h2>
+    <div class="user-info">
+        <img src="~/Static_files/user.png" class="profile-picture">
+        <h1 class="nickClass">@ViewBag.Name @ViewBag.Surname</h1>
+        <p class="emailClass">@User.Identity.Name</p>
+    </div>
+    <div class="user-actions">
+        <a href="ChangePassword" class="btn btn-primary">Zmień hasło</a>
+        <a href="checkUserOrder" class="btn btn-secondary">Zobacz zamówienia</a>
+    </div>
+</div>
+
+@Styles.Render("~/Content/manageIndex2.css")

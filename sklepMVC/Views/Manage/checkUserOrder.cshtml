@@ -1,0 +1,85 @@
+﻿@{
+    ViewBag.Title = "checkUserOrder";
+}
+
+<h2>Moje zamówienia</h2>
+@Styles.Render("~/Content/checkUserOrder.css")
+<style>
+    table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+    th, td {
+        border: 1px solid #ddd;
+        padding: 8px;
+        text-align: left;
+    }
+
+    th {
+        background-color: #f2f2f2;
+    }
+
+    .order-date {
+        text-align: center;
+    }
+
+    .product-name {
+        text-align: left;
+    }
+
+    .order-product-table {
+        background-color: #1ca1b4;
+    }
+</style>
+
+<table>
+    <thead>
+        <tr>
+            <th>Numer zamówienia</th>
+            <th>Data zamówienia</th>
+            <th>Status</th>
+            <th>Cena</th>
+            <th>Metoda płatności</th>
+            <th>Metoda wysyłki</th>
+        </tr>
+    </thead>
+    <tbody>
+        @{int i = 1; }
+        @foreach (var order in Model)
+        {
+            <tr>
+                <td>@i</td>
+                <td class="order-date">@order.Date</td>
+                <td>@order.Status</td>
+                <td>@order.TotalPrice</td>
+                <td>@order.PaymentMethod</td>
+                <td>@order.ShippingMethod</td>
+            </tr>
+            <tr>
+                <td colspan="4">
+                    <table >
+                        <thead >
+                            <tr>
+                                <th class="order-product-table">Nazwa produktu</th>
+                                <th class="order-product-table">Cena</th>
+                                <th class="order-product-table">Ilość</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var product in order.OrderProduct)
+                            {
+                                <tr>
+                                    <td class="product-name">@product.Product.Name</td>
+                                    <td class="product-name">@product.Product.Price</td>
+                                    <td class="product-name">1 </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </td>
+            </tr>
+            { i += 1; }
+        }
+    </tbody>
+    </table>

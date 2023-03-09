@@ -1,0 +1,99 @@
+﻿@{
+    ViewBag.Title = "Summary";
+}
+
+<h2>Podsumowanie</h2>
+@Styles.Render("~/Content/cartView.css")
+<h3>
+    Zamówienia użytkownika: @ViewBag.User
+    
+
+</h3>
+<table>
+    <tr>
+        <th>Nazwa</th>
+        <th>Zdjęcie</th>
+        <th>Cena</th>
+    </tr>
+    @if (Model != null)
+    {
+        decimal sum = 0;
+        foreach (var product in Model)
+        {
+            <tr>
+                <td>@product.Name</td>
+                <td>
+                    @if (product.Image != null)
+                    {
+                        var base64 = Convert.ToBase64String(product.Image);
+                        var imgsrc = string.Format("data:image/gif;base64,{0}", base64);
+                        <img src='@imgsrc' height="50" />
+                    }
+
+                </td>
+                <td>@product.Price zł</td>
+            </tr>
+            sum += product.Price;
+        }
+        <h4>Suma zakupów: @sum zł</h4>
+
+    }
+</table>
+<br />
+@using (Html.BeginForm("confirmSummary", "Orders", FormMethod.Post, new { id = "confirmForm" }))
+{
+    @Html.AntiForgeryToken()
+    <div>
+        Metoda płatności:   @Html.DropDownList("paymentMethod", null, htmlAttributes: new { @class = "form-control" })
+        <br />
+    </div>
+
+    <div>
+        Sposób dostawy:   @Html.DropDownList("shippingMethod", null, htmlAttributes: new { @class = "form-control" })
+        <br />
+    </div>
+    <button class="btn btn-info " type="submit" onclick="showNotification()">Potwierdź zamówienie </button>
+
+}
+
+<br />
+<div class="form-group">
+    <div class="col-md-10">
+    </div>
+</div>
+<script type="text/javascript">
+    function showNotification() {
+        var notification = document.createElement("div");
+        notification.innerHTML = "Twoje zamówienie zostało zatwierdzone";
+        notification.style.backgroundColor = "green";
+        notification.style.color = "white";
+        notification.style.padding = "20px";
+        notification.style.position = "fixed";
+        notification.style.top = "100px";
+        notification.style.right = "100px";
+        notification.style.zIndex = "1";
+
+        document.body.appendChild(notification);
+
+        setTimeout(function () {
+            notification.style.display = "none";
+        }, 10000);
+    }
+</script>
+@*<script type="text/javascript">
+    $(document).ready(function () {
+        $('#confirmForm').submit(function (event) {
+            // Potwierdzenie formularza
+            event.preventDefault();
+            $.ajax({
+                url: this.action,
+                type: this.method,
+                data: $(this).serialize(),
+                success: function (result) {
+                    // Wywołanie skryptu po udanej transmisji
+                    showNotification();
+                }
+            });
+        });
+    });
+</script>*@

@@ -1,0 +1,107 @@
+Funkcjonalnoœci:
+• wyœwietlanie listy produktów. Koszyk z mo¿liwoœci¹ dodawania produktów i edycj¹
+zawartoœci. Mo¿liwoœæ z³o¿enia zamówienia – 6 pkt. -> ZROBIONE
+
+• zarz¹dzanie produktami w panelu administracyjnym – 2 pkt. ZROBIONE
+
+• kategorie produktów. Kategorie tworz¹ wielopoziomowe drzewa. Ka¿dy produkt nale¿y do
+dok³adnie jednej kategorii – 2 pkt. ZROBIONE -> Produkt mo¿e nale¿eæ do wielu kategorii
+
+• dodawanie obrazków do produktów. Co najmniej dwa obrazki dla ka¿dego produktu:
+obrazek ma³y na listê i obrazek du¿y do opisu szczegó³owego – 2 pkt.  ZROBIONE
+
+• automatyczne tworzenie obrazka ma³ego jako miniaturki obrazka du¿ego. Miniaturka
+powinna byæ przeskalowana do rozmiaru ustalonego dla obrazków ma³ych a jednoczeœnie
+zachowaæ proporcje orygina³u – 2 pkt. ZROBIONE
+
+• mo¿liwoœæ za³¹czania dodatkowych plików do produktu (np. instrukcja u¿ytkownika, karta
+katalogowa). Ka¿dy plik posiada swój opis. Liczba plików nie jest ograniczona – 2 pkt. ZROBIONE
+
+• licznik odwiedzin sklepu – 2 pkt. ZROBIONE
+
+• wyszukiwanie proste na podstawie podanych s³ów kluczowych – 2 pkt. ZROBIONE
+
+• mo¿liwoœæ wyboru sposobu p³atnoœci i sposobu wysy³ki zakupionych produktów – 2 pkt. -> ZROBIONE
+
+• rejestracja klientów w sklepie. Profil u¿ytkownika z loginem, has³em i danymi potrzebnymi
+do wysy³ki. Mo¿liwoœæ zalogowania siê na swoje konto. Zarz¹dzanie klientami przez
+administratora – 4 pkt. ZROBIONE
+
+• zapisywanie danych zamówienia wraz z poszczególnymi pozycjami w bazie. Ka¿de
+zamówienie mo¿e byæ w jednym ze stanów: nowe, w trakcie realizacji, zrealizowane,
+anulowane. Mo¿liwoœæ zmiany stanu zamówienia przez administratora – 2 pkt. -> ZROBIONE
+
+• generowanie cennika produktów w formacie PDF dla wybranej kategorii – 4 pkt -> ZROBIONE
+
+• szczegó³owy opis produktu. Opis taki mo¿e zawieraæ elementy HTML. Opis taki jest
+pokazywany m.in. po wybraniu produktu z listy – 1pkt. -> ZROBIONE
+
+• formularz kontaktowy z mo¿liwoœci¹ zadania pytania dotycz¹cego sklepu. Pytania wysy³ane
+s¹ na adres e-mail ustawiany w administracji – 2 pkt. -> ZROBIONE
+
+• bezpieczna procedura przypominania i zmiany has³a – 2 pkt. -> ZROBIONE
+
+• automatyczne wysy³anie informacji o zmianie stanu zamówienia do klienta – 2 pkt. ZROBIONE
+
+39pkt
+------------------------------------------------------------------------------------------------------------------------------------------
+• wpisywanie stawek podatku VAT na ka¿dy produkt. Stawka jest wybierana z listy prawnie
+obowi¹zuj¹cych stawek. Odró¿nienie stawki zerowej od zwolnienia. Wyœwietlanie cen netto
+je¿eli u¿ytkownik ustawi tak¹ opcjê w profilu – 2pkt. -> Stawki VAT bez mo¿liwoœci zobaczenia cen netto 
+
+• historia zamówieñ u¿ytkownika w profilu. Podgl¹d stanu niezrealizowanych zamówieñ.
+Mo¿liwoœæ ponowienia zamówienia (produkty z zaznaczonego zamówienia s¹ dodawane dokoszyka) – 2 pkt. -> Historia bez niezrealizowanych
+
+• stronicowanie list produktów. Ustawienie liczby produktów na stronie w profilu
+u¿ytkownika – 2 pkt. -> Stronnicowanie bez ustawiania
+
+• formularz kontaktowy z mo¿liwoœci¹ zadania pytania dotycz¹cego danego produktu. Pytanie
+wysy³ane jest na e-mail eksperta zwi¹zanego z danym produktem – 2 pkt. -> Ekspertem jest jedna, bardzo zdolna osoba
+
+
+------------------------------------------------------------------------------------------------------------------------------------------
+• stany magazynowe produktów. Automatyczna aktualizacja stanów przy realizacji
+zamówienia (zmiany stanu na zrealizowane) – 2 pkt.
+
+• automatyczne wysy³anie zestawienia zamówienia na e-mail klienta tu¿ po z³o¿eniu
+zamówienia – 2 pkt.
+------------------------------------------------------------------------------------------------------------------------------------------
+• nowoœci i promocje. Do nowoœci automatycznie zalicza siê okreœlon¹ liczbê ostatnio
+dodanych produktów. Promocje polegaj¹ na czasowej obni¿ce ceny danego produktu.
+Nowoœci i promocje maj¹ swoje wyró¿nione miejsce w sklepie – 2 pkt.
+
+• wielowalutowoœæ. Mo¿liwoœæ wyboru waluty, w której podawane s¹ ceny. Kursy walut
+aktualizowane automatycznie z serwisu NBP – 4 pkt.
+
+• mo¿liwoœæ ukrywania produktów i kategorii (np. w celu ich opublikowania dopiero po
+skompletowaniu wszystkich danych). Elementy ukryte nie s¹ widoczne dla klienta – 2 pkt.
+
+• generowanie kodu HTML z opisem kodu szczegó³owego produktu tak, by opis mo¿na by³o
+bezpoœrednio wstawiæ do zewnêtrznego serwisu aukcyjnego – 2 pkt.
+
+• kosz na usuwane produkty. Mo¿liwoœæ przywrócenia produktu na poprzednie miejsce.
+Fizyczne usuniêcie produktu po usuniêciu go z kosza – 2 pkt.
+
+• newsletter z informacjami o nowoœciach i promocjach. U¿ytkownik w profilu mo¿e
+zaznaczyæ opcjê wysy³ania newslettera. Co jakiœ czas administrator uruchamia procedurê
+wysy³ania newsletterów (procedura mo¿e te¿ byæ uruchamiana automatycznie).
+U¿ytkownicy otrzymuj¹ e-maile z list¹ nowoœci i promocji w sklepie – 2 pkt.
+
+• mo¿liwoœæ nadawania upustów cenowych dla wybranych klientów – 2 pkt.
+
+• powiadomienie klienta o ewentualnym braku zamawianego produktu w magazynie.
+Propozycja usuniêcia towaru z koszyka lub oczekiwania z realizacj¹ zamówienia a¿ do
+czasu dostêpnoœci produktu – 2 pkt.
+
+• wyszukiwanie zaawansowane z co najmniej piêcioma kryteriami, np.: s³owa kluczowe w
+nazwie, symbolu b¹dŸ opisach, kategoria, producent, przedzia³ cenowy, itp. – 4 pkt.
+
+• operatory typu and, or i not przy wyszukiwaniu – 2 pkt.
+
+• lista 10 najczêœciej kupowanych produktów – 2 pkt.
+
+• wybór skórek dla interfejsu u¿ytkownika – 2 pkt. za dwie istotnie ró¿ne skórki i 1 pkt. za
+trzeci¹.
+
+• dodatkowe wersje jêzykowe interfejsu u¿ytkownika – 2 pkt. za pierwszy dodatkowy jêzyk i
+1 pkt. za drugi.

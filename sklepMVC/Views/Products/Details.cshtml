@@ -1,0 +1,120 @@
+﻿@model sklepMVCv2.Models.ProductDetailsViewModel
+
+@{
+	ViewBag.Title = "Szczegóły produktu";
+}
+
+<h2>Szczegóły produktu</h2>
+
+<style>
+	.product-details {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		text-align: center;
+	}
+
+		.product-details dt,
+		.product-details dd {
+			width: 100%;
+		}
+
+		.product-details img {
+			max-width: 50%;
+			margin: 20px 0;
+		}
+</style>
+
+
+
+@*@ViewBag.categories*@
+<div class="product-details">
+	<h3 class="product-name">@Html.DisplayFor(model => model.Product.Name)</h3>
+	<div class="product-image">
+		@{
+			if (Model.Product.Image != null)
+			{
+				var base64 = Convert.ToBase64String(Model.Product.Image);
+				var imgsrc = string.Format("data:image/gif;base64,{0}", base64);
+				<img src='@imgsrc' />
+			}
+		}
+	</div>
+	<div class="product-description">
+		<p><strong>@Html.DisplayNameFor(model => model.Product.Description):</strong> @Html.DisplayFor(model => model.Product.Description)</p>
+	</div>
+	<div class="product-info">
+		<div class="product-price">
+			<p><strong>@Html.DisplayNameFor(model => model.Product.Price):</strong> @Html.DisplayFor(model => model.Product.Price)</p>
+			<p><strong>@Html.DisplayNameFor(model => model.Product.Vat.VatRate):</strong> @Html.DisplayFor(model => model.Product.Vat.VatRate)</p>
+		</div>
+		<div class="product-quantity">
+			<p><strong>@Html.DisplayNameFor(model => model.Product.Quantity):</strong> @Html.DisplayFor(model => model.Product.Quantity)</p>
+		</div>
+	</div>
+	<div class="product-categories">
+		<h4>Kategorie:</h4>
+		<ul>
+			@foreach (var category in @ViewBag.categories)
+			{
+				<li>@category</li>
+			}
+		</ul>
+	</div>
+	<div class="product-files">
+		<h4>Dodatkowe pliki:</h4>
+		<ul>
+			@foreach (var pdf in Model.PdfFiles)
+			{
+				<li>@pdf.Name @Html.ActionLink("Pobierz", "Download", "Products", new { id = pdf.ExtraFileID }, null)</li>
+			}
+		</ul>
+		<button class="btn btn-primary" onclick="location.href='@Url.Action("AddToCart",new { id= Model.Product.ProductID })';return false;">
+			Dodaj do koszyka
+			<i class="bi bi-cart"></i>
+		</button>
+	</div>
+	@using (Html.BeginForm())
+	{
+		@Html.AntiForgeryToken()
+
+		<div class="form-horizontal">
+			<hr />
+			@Html.ValidationSummary(true, "", new { @class = "text-danger" })
+			<div class="form-group">
+				Wyślij pytanie do eksperta:
+				<textarea name="question" id="question"
+						  rows="5" cols="40"
+						  data-val-required="The Description field is required."
+						  data-val-maxlength-max="5000"
+						  data-val-maxlength="The field Description must be a string or array type with a maximum length of '5000'."
+						  data-val="true"></textarea>
+
+			</div>
+
+			<div class="form-group">
+				<div class="col-md-offset-2 col-md-10">
+					<input type="submit" value="Wyślij" class="btn btn-default" />
+				</div>
+			</div>
+		</div>
+		if (ViewBag.alert != null)
+		{
+			<div class="alert alert-danger">@ViewBag.alert</div>
+		}
+	}
+</div>
+
+
+<p>
+	@{ if ((string)Session["PreviousView"] == "UserView")
+		{
+
+			@Html.ActionLink("Back to List", "UserView")}
+		else if ((string)Session["PreviousView"] == "AdminView")
+		{
+			@Html.ActionLink("Edit", "Edit", new { id = Model.Product.ProductID })
+			@Html.Raw(" | ")
+			@Html.ActionLink("Wróc do listy produktów", "Index")}
+	}
+</p>

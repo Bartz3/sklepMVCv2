@@ -1,0 +1,34 @@
+﻿@model IEnumerable<sklepMVCv2.Models.Category>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Kategorie</h2>
+
+<p>
+    <button type="button" class="btn btn-primary" onclick="location.href='@Url.Action("Create","Categories")';return false;">Dodaj nową kategorię</button>
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.CategoryName)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.CategoryName)
+        </td>
+		<td>
+			<button type="button" class="btn btn-dark" onclick="location.href='@Url.Action("Details", new { id = item.CategoryID })';return false;">Szczegóły</button>
+			<button type="button" class="btn btn-dark" onclick="location.href='@Url.Action("Edit", new { id = item.CategoryID })';return false;">Edytuj</button>
+			<button type="button" class="btn btn-dark" onclick="location.href='@Url.Action("Delete", new { id = item.CategoryID })';return false;">Usuń</button>
+			<button type="button" class="btn btn-dark" onclick="location.href='@Url.Action("Generate", new { id = item.CategoryID })';return false;">Wygeneruj cennik</button>
+		</td>
+    </tr>
+}
+
+</table>

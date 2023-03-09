@@ -1,0 +1,172 @@
+﻿@model sklepMVCv2.Models.RegisterViewModel
+@{
+    ViewBag.Title = "Register";
+}
+@*@Styles.Render("~/Content/Register.css")*@
+
+<style>
+    table {
+        display: flex;
+        flex-wrap: wrap;
+        border: 1px solid #ccc;
+        border-radius: 8px;
+        padding: 20px;
+        box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+        margin-bottom: 20px;
+    }
+
+    th:first-child {
+        width: 50%;
+        padding-right: 100px;
+
+    }
+
+    th:last-child {
+        width: 50%;
+        padding-left: 100px;
+
+    }
+
+    .form-control {
+        width: 100%;
+        padding: 12px 20px;
+        margin: 8px 0;
+        box-sizing: border-box;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        transition: border-color 0.3s ease-in-out;
+        
+    }
+
+        .form-control:focus {
+            border-color: #3498db;
+            outline: none;
+        }
+</style>
+
+@using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+{
+    <div class="register">
+        @Html.AntiForgeryToken()
+        <h2>
+            Rejestracja
+        </h2>
+        <h4>
+            Załóż nowe konto
+        </h4>
+        <hr />
+        @Html.ValidationSummary("", new { @class = "text-danger" })
+    <table>
+        <tr>
+            <th>
+                <p>Dane konta </p>
+                <div class="form-group">
+                    @Html.LabelFor(m => m.Email, new { @class = "col-md-2 control-label" })
+                    <div class="col-md-10">
+                        @Html.TextBoxFor(m => m.Email, new { @class = "form-control margin" })
+                    </div>
+                </div>
+            </th>
+            <th>
+                <p>Dane osobowe</p>
+                <div class="form-group">
+                    @Html.LabelFor(m => m.Name, new { @class = "col-md-2 control-label" })
+                    <div class="col-md-10">
+                        @Html.TextBoxFor(m => m.Name, new { @class = "form-control margin" })
+                    </div>
+                </div>
+            </th>
+        </tr>
+
+        <tr>
+            <th>
+                <div class="form-group">
+                    @Html.LabelFor(m => m.Password, new { @class = "col-md-2 control-label" })
+                    <div class="col-md-10">
+                        @Html.PasswordFor(m => m.Password, new { @class = "form-control margin" })
+                    </div>
+                </div>
+            </th>
+            <th>
+                <div class="form-group">
+                    @Html.LabelFor(m => m.Surname, new { @class = "col-md-2 control-label" })
+                    <div class="col-md-10">
+                        @Html.TextBoxFor(m => m.Surname, new { @class = "form-control margin" })
+                    </div>
+                </div>
+            </th>
+        </tr>
+        <tr>
+            <th >
+                <div class="form-group" >
+                    @Html.LabelFor(m => m.ConfirmPassword, new { @class = "col-md-2 control-label" })
+                    <div class="col-md-10" >
+                        @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control margin" })
+                    </div>
+                </div>
+            </th>
+            <th>
+                <div class="form-group">
+                    @Html.LabelFor(m => m.City, new { @class = "col-md-2 control-label" })
+                    <div class="col-md-10">
+                        @Html.TextBoxFor(m => m.City, new { @class = "form-control margin" })
+                    </div>
+                </div>
+            </th>
+        </tr>
+
+
+
+        <tr>
+            <th>
+            </th>
+            <th>
+                <div class="form-group">
+                    @Html.LabelFor(m => m.Street, new { @class = "col-md-2 control-label" })
+                    <div class="col-md-10">
+                        @Html.TextBoxFor(m => m.Street, new { @class = "form-control margin" })
+                    </div>
+                </div>
+            </th>
+        </tr>
+        <tr>
+            <th>
+                <div class="form-group">
+                </div>
+            </th>
+            <th>
+                <div class="form-group">
+                    @Html.LabelFor(m => m.HouseNumber, new { @class = "col-md-2 control-label" })
+                    <div class="col-md-10">
+                        @Html.TextBoxFor(m => m.HouseNumber, new { @class = "form-control margin" })
+                    </div>
+                </div>
+            </th>
+        </tr>
+        <tr>
+            <th>
+                <div class="form-group">
+                </div>
+            </th>
+            <th>
+                <div class="form-group">
+                    @Html.LabelFor(m => m.ZipCode, new { @class = "col-md-2 control-label" })
+                    <div class="col-md-10">
+                        @Html.TextBoxFor(m => m.ZipCode, new { @class = "form-control margin" })
+                    </div>
+                </div>
+            </th>
+        </tr>
+        <tr>
+            <td colspan="2" style="text-align: center;">
+                  <input type="submit" class="btn btn-primary " value="Rejestracja" />
+            </td>
+        </tr>
+    </table>
+        <hr />
+        
+    </div>
+}
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
