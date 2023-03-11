@@ -1,6 +1,6 @@
 # sklepMVCv2
 Web app written in ASP .net MVC with Entity Framework. Database is located at Azure Server.
-An online store where customers can browse through the product offerings, add items to their shopping cart, create an account, and view their order history.
+An online store where customers can browse through the product offerings, add items to their shopping cart, create an account, ask expert about product and view their order history.
 
 Exemplary application functionalities:
 
